@@ -28,17 +28,26 @@ function onLoad(){
 	scene = new THREE.Scene();
 	
 	// Put in a camera
-	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, container.offsetWidth / container.offsetHeight, NEAR, FAR );
-	camera.position.set( 0, 0, 3 );
-	
+	mainCamera = new THREE.PerspectiveCamera( VIEW_ANGLE, container.offsetWidth / container.offsetHeight, NEAR, FAR );
+	mainCamera.position.set( 0, 2, 3 );
+	mainCamera.eulerOrder = 'YXZ';  // set the order in which the rotations are aplied to the object
 	// Create a directional light to show off the object
 	var light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(0, 0, 1);
 	scene.add( light );
 	
+	var terrainMesh = new THREE.Mesh( generateTerrain(2,5,5), new THREE.MeshLambertMaterial({color: 0xCC0000}) );
+	terrainMesh.position.y = -4;
+	console.log(terrainMesh.material.opacity);
+	//terrainMesh.position.y = 40;
+	terrainMesh.scale.x = 20;
+	terrainMesh.scale.z = 20;
+	scene.add (terrainMesh);
+	
 	
 	jsonLoader.load( "./meshes/fighter_obj.js", function( geometry ) { addToScene( geometry ) } );
 
+	updateInput = addInput();
 
 	function addToScene( geometry ) {
 		console.log("addToScene()");
@@ -46,11 +55,11 @@ function onLoad(){
         playerMesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 		
 		
-		playerMesh.rotation.x = Math.PI / 5;
-		playerMesh.rotation.y = Math.PI / 5;
-		playerMesh.scale.x = 0.5;
-		playerMesh.scale.y = 0.5;
-		playerMesh.scale.z = 0.5;
+		//playerMesh.rotation.x = Math.PI / 5;
+		//playerMesh.rotation.y = Math.PI / 5;
+		playerMesh.scale.x = 0.7;
+		playerMesh.scale.y = 0.7;
+		playerMesh.scale.z = 0.7;
 		
 		//playerMesh.position.x = 0.5;
 		//playerMesh.position.y = 0.5;
@@ -61,8 +70,8 @@ function onLoad(){
 }
 
 function run() {
-
-	renderer.render( scene, camera );
+	updateInput();
+	renderer.render( scene, mainCamera );
 	
 	if(playerMesh !== null){
 		playerMesh.rotation.y -= 0.01;	

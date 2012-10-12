@@ -15,3 +15,10 @@ var container = null; //document.getElementById("container");
 var reqFrame = null;
 
 var playerMesh = null;
+
+var mainCamera = null;
+var camXrot = 0;
+var camYrot = 0;
+
+// function called per loop to update the input
+var updateInput = null;
