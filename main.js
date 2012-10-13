@@ -40,7 +40,7 @@ function onLoad(){
 	var light2 = new THREE.AmbientLight( 0x555555 ); 
 	scene.add( light2 );
 
-	scene.fog =	new THREE.Fog( 0x0088FF, 10, 200 )
+	scene.fog =	new THREE.Fog( 0x00AAFF, 10, 200 )
 	
 	
 	
