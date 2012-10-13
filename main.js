@@ -33,15 +33,19 @@ function onLoad(){
 	mainCamera.eulerOrder = 'YXZ';  // set the order in which the rotations are aplied to the object
 	// Create a directional light to show off the object
 	var light = new THREE.DirectionalLight( 0xffffff, 1.5);
-	light.position.set(0, 0, 1);
+	light.position.set(0, 200, 200);
 	scene.add( light );
 	
-	var terrainMesh = new THREE.Mesh( generateTerrain(2,5,5), new THREE.MeshLambertMaterial({color: 0xCC0000}) );
+	var light2 = new THREE.AmbientLight( 0x555555 ); 
+	scene.add( light2 );
+	
+	var terrainMesh = new THREE.Mesh( generateTerrain(4,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
 	terrainMesh.position.y = -4;
 	console.log(terrainMesh.material.opacity);
 	//terrainMesh.position.y = 40;
-	terrainMesh.scale.x = 20;
-	terrainMesh.scale.z = 20;
+	terrainMesh.scale.x = 100;
+	terrainMesh.scale.z = 100;
+	terrainMesh.material
 	scene.add (terrainMesh);
 	
 	

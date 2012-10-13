@@ -85,6 +85,13 @@ function addInput(){
             mainCamera.position.z -= Math.sin(mainCamera.rotation.y) * 0.1;
             mainCamera.position.x += Math.cos(mainCamera.rotation.y) * 0.1;
         }
+        
+        if ( 81 in keysDown) {	//Q
+            mainCamera.position.y += .1;
+        }
+        if ( 69 in keysDown) {	//E
+            mainCamera.position.y -= .1;
+        }
 	    mainCamera.updateMatrix();
 	}
     
