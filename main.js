@@ -22,6 +22,7 @@ function onLoad(){
 	// Create the Three.js renderer, add it to our div
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setSize(container.offsetWidth, container.offsetHeight);
+	renderer.setClearColorHex(0x0088ff, 1);
 	container.appendChild( renderer.domElement );
 	
 	// Create a new Three.js scene
@@ -38,6 +39,10 @@ function onLoad(){
 	
 	var light2 = new THREE.AmbientLight( 0x555555 ); 
 	scene.add( light2 );
+
+	scene.fog =	new THREE.Fog( 0x0088FF, 10, 200 )
+	
+	
 	
 	var terrainMesh = new THREE.Mesh( generateTerrain(4,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
 	terrainMesh.position.y = -4;

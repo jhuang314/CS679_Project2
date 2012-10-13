@@ -36,6 +36,34 @@ var NamespaceTerrain = {
 	"h":null // working mesh h
 	};
 
+function skewTerrain(mesh){
+	var NT = NamespaceTerrain;
+	
+	if("isTerrain" in mesh){
+		var w = mesh.terrainVars.w;
+		var h = mesh.terrainVars.h;
+		
+		//var tempArr = new Array(w * h);
+		NT.setWorkingMesh(mesh);
+		
+		var i = 0;
+		var j = 0;
+		
+		
+		var weight = 0; 
+		var sum = 0; 
+		
+		
+		// this here applys a blur filter to the y values in the heightmap	
+		for(i = 0; i < w; i++){
+			for(j = 0; j < h; j++){
+				NT.yset(i,j, NT.yget(i,j) - i * .4 - j * .8);
+			}
+			
+		}
+	}
+}
+
 function smoothTerrain (mesh){
 	var NT = NamespaceTerrain;
 	
@@ -142,6 +170,7 @@ function generateTerrain(order, rows, cols){
 	smoothTerrain(gridMesh);
 	smoothTerrain(gridMesh);
 	smoothTerrain(gridMesh);
+	//skewTerrain(gridMesh)
 	//console.log(gridMesh);
 	//var ar = function(x,y,set){
 	//	gridMesh.vertices[x + y*h];
