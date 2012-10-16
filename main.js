@@ -37,13 +37,16 @@ function onLoad(){
 	light.position.set(0, 200, 200);
 	scene.add( light );
 	
-	var light2 = new THREE.AmbientLight( 0x555555 ); 
+	var light2 = new THREE.PointLight( 0xff0000, 10, 50 );
+	light2.position.set(50, -5, 50); 
 	scene.add( light2 );
 
 	scene.fog =	new THREE.Fog( 0x00AAFF, 10, 200 )
 	
-	
-	
+	lightSphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhongMaterial({color: 0xff0000, ambient: 0xff0000, specular: 0xff0000, emissive: 0xff0000, shininess:0}));
+	lightSphere.position.set(50, -5, 50);
+	scene.add(lightSphere);
+	 
 	var terrainMesh = new THREE.Mesh( generateTerrain(4,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
 	terrainMesh.position.y = -4;
 	console.log(terrainMesh.material.opacity);
@@ -53,28 +56,21 @@ function onLoad(){
 	terrainMesh.material
 	scene.add (terrainMesh);
 	
-	
-	jsonLoader.load( "./meshes/fighter_obj.js", function( geometry ) { addToScene( geometry ) } );
+	/* 
+	for some reason, you need:
+		 function(geo){Player.load(geo);}
+	rather than
+		 Player.load
+		 
+	calling Player.load dirrectly from this function will correctly add the mesh
+	to the scene, but will not update the Player object. I suspect that this is
+	because of the fact the loader uses a seperate thread to load the object,
+	I still have not figured out how javascrip threading works. 
+	*/
+	jsonLoader.load( "./meshes/fighter_obj.js", function(geo){Player.load(geo);} );
 
 	updateInput = addInput();
 
-	function addToScene( geometry ) {
-		console.log("addToScene()");
-		
-        playerMesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
-		
-		
-		//playerMesh.rotation.x = Math.PI / 5;
-		//playerMesh.rotation.y = Math.PI / 5;
-		playerMesh.scale.x = 0.7;
-		playerMesh.scale.y = 0.7;
-		playerMesh.scale.z = 0.7;
-		
-		//playerMesh.position.x = 0.5;
-		//playerMesh.position.y = 0.5;
-		playerMesh.position.z = -4;
-		scene.add(playerMesh);
-    }
 	run();
 }
 
@@ -82,8 +78,9 @@ function run() {
 	updateInput();
 	renderer.render( scene, mainCamera );
 	
-	if(playerMesh !== null){
-		playerMesh.rotation.y -= 0.01;	
+	if(Player.mesh !== null){
+		Player.mesh.rotation.y -= 0.01;
+		console.log("Trying to rotate player");	
 	}
 
 	reqFrame(run); 

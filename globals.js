@@ -9,6 +9,8 @@ var ASPECT = WIDTH / HEIGHT;
 var NEAR = 0.1;
 var FAR = 10000;
 
+var scene = null; 
+
 // Grab our container div(from cube example code)
 var container = null; //document.getElementById("container");
 
@@ -22,3 +24,9 @@ var camYrot = 0;
 
 // function called per loop to update the input
 var updateInput = null;
+
+var STATE = {
+	DEAD: 0,
+	ALIVE: 1
+	
+};
