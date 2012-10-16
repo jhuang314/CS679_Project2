@@ -65,10 +65,10 @@ function onLoad(){
 	calling Player.load dirrectly from this function will correctly add the mesh
 	to the scene, but will not update the Player object. I suspect that this is
 	because of the fact the loader uses a seperate thread to load the object,
-	I still have not figured out how javascrip threading works. 
+	I still have not figured out how javascript threading works. 
 	*/
 	jsonLoader.load( "./meshes/fighter_obj.js", function(geo){Player.load(geo);} );
-
+    spawnObject(null, null);
 	updateInput = addInput();
 
 	run();
@@ -80,7 +80,7 @@ function run() {
 	
 	if(Player.mesh !== null){
 		Player.mesh.rotation.y -= 0.01;
-		console.log("Trying to rotate player");	
+		
 	}
 
 	reqFrame(run); 

@@ -4,7 +4,7 @@ var Player = {
 	mesh: null, // for now, the mesh will be loaded in later.
 	
 	load: function(geometry){
-		console.log("Player.load()");
+		
 		this.mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 		
 		
@@ -19,9 +19,7 @@ var Player = {
 		this.mesh.position.z = -4;
 		scene.add(this.mesh);
 		
-		if(this.mesh !== null){
-			console.log("mesh created");
-		}
+		
 	
 	}
 
