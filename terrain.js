@@ -40,8 +40,8 @@ function skewTerrain(geometry){
 	var NT = NamespaceTerrain;
 	
 	if("isTerrain" in geometry){
-		var w = mesh.terrainVars.w;
-		var h = mesh.terrainVars.h;
+		var w = geometry.terrainVars.w;
+		var h = geometry.terrainVars.h;
 		
 		//var tempArr = new Array(w * h);
 		NT.setWorkingGeometry(geometry);
@@ -124,12 +124,104 @@ var terrainVars = function(w,h){
 	this.height = h; 	
 }
 
+function nanTest(name, value){
+	if(isNaN(value)){
+		//
+		throw new UserException("NaN Check Failed: " + name)
+	} else {
+	    console.log(name + ": " + value);
+	}
+}
+
 function getTerrainHeight(terrainMesh, x,z){
-	if("isTerrain" in terrain.mesh){
-	 	var w = terrain.terrainVars.w;
-	 	var h = terrain.terrainVars.h;
+	if("isTerrain" in terrainMesh.geometry){
+	
+		var vget = function(_x,_y){
+			return v[_x + _y * w];
+					
+		}
+	
+		// width in indexes
+	 	var w = terrainMesh.geometry.terrainVars.w;
+	 	var h = terrainMesh.geometry.terrainVars.h;
+	 	//nanTest("h", h);
+	 	var v = terrainMesh.geometry.vertices;
 	 	
-	 	var xm = x - terrain.position.x
+	 	// convert to mesh coordinates 
+	 	var xm = (x - terrainMesh.position.x ) / terrainMesh.scale.x;
+	 	var zm = (z - terrainMesh.position.z ) / terrainMesh.scale.z;
+		
+		
+				
+		//nanTest("xm", xm);
+		
+		// convert to index coordinates                    
+		var xi = Math.floor(xm * (w - 1));
+		var zi = Math.floor(zm * (h - 1));
+		
+		//nanTest("xi", xm);
+		
+		if (zi >= h || xi >= w || xi < 0 || zi < 0){
+			throw new UserException("Given Position is not over this mesh: " + xi + ", " + zi + " max: " + (w - 1) + ", " + (h - 1) );
+		}
+		
+		/*the given point falls within a square like this:  
+		
+		   		x ->
+			  a+-----+
+			z  |    /|
+			|  |  /  |
+			v  |/    |
+			   +-----+b
+			   
+		so we see whether is is closest to corner a (xi, zi) or b (xi + 1, zi + 1)
+		
+		Just realized this method is broken if the the two triangles don't 
+		actualy form a square. 
+		
+		*/ 
+		var da_sqr = Math.pow(xm - vget(xi, zi).x, 2) + Math.pow(zm - vget(xi, zi).z, 2);
+	 	var db_sqr = Math.pow(xm - vget(xi + 1, zi + 1).x, 2) + Math.pow(zm - vget(xi + 1, zi +1).z, 2);
+	 	
+	 	
+	 	//nanTest("db_sqr", db_sqr);
+	 	
+	 	var v0 = vget(xi, zi);
+	 	
+	 	
+		 
+		var vx0 = vget(xi + 1, zi);
+	 	var vz0 = vget(xi , zi + 1);
+	 	
+	 	debug12 = 0;
+	 	
+		var xbase = new THREE.Vector3(1/w, vx0.y - v0.y , 1 / h);
+		var zbase = new THREE.Vector3(1/w, vz0.y - v0.y , 1 / h);
+		
+	 	if(db_sqr < da_sqr){
+			debug12 = 1;
+			vx0 = vget(xi, zi + 1);
+			 
+		 	vz0 = vget(xi + 1, zi);
+			
+			v0 = vget(xi + 1, zi +1);
+			
+		 	xbase = new THREE.Vector3(-1/w, vx0.y - v0.y ,-1 / h);
+			zbase = new THREE.Vector3(-1/w, vz0.y - v0.y , -1 / h);	
+		}
+		
+		
+		
+		//nanTest("zbase", zbase);
+		
+		sx = xbase.y / xbase.x
+		sz = zbase.y / zbase.z
+	
+		xL = xm - v0.x;
+		zL = zm - v0.z;
+		
+		return (xL * sx + zL * sz + v0.y) * terrainMesh.scale.y + terrainMesh.position.y;
+		
 	 	
 	}
 
@@ -159,31 +251,31 @@ function generateTerrain(order, rows, cols){
 	// Hopefully we can improve the look later.
 	var i = 0;
 	var j = 0;
-	for(i = 0; i < w; i++){
-		for(j = 0; j < h; j++){
+	for(j = 0; j < w; j++){
+		for(i = 0; i < h; i++){
 			var spike = 0;
 			
 			if(Math.random() < .02){
 				spike = Math.random() * 300
 			}
 		
-			gridGeometry.vertices.push( new THREE.Vector3( i / (w - 1), spike + Math.random() * 10 - 20, j/(h - 1) ));
+			gridGeometry.vertices.push( new THREE.Vector3( i / (w - 1), spike + Math.random() * 10 , j/(h - 1) ));
 		}
 		
 	}
 	
-	for(i = 0; i < w - 1; i++){
-		for(j = 0; j < h - 1; j++){
+	for(j = 0; j < w - 1; j++){
+		for(i = 0; i < h - 1; i++){
 			/*==================
 			   i ->
-			   +-----+
-			j  |    /|
-			|  |  /  |
-			v  |/    |
-			   +-----+
+			   +------+
+			j  |1   2/|
+			|  |   / 2|
+			v  |3/1  3|
+			   +------+
 			================*/
-			gridGeometry.faces.push( new THREE.Face3( j*w + i, j*w + i+1, (j+1)*w + i));
-			gridGeometry.faces.push( new THREE.Face3((j+1)*w + i, j*w + i+1, (j+1)*w + i+1 ));
+			gridGeometry.faces.push( new THREE.Face3( (j+1)*w + i, j*w + i+1, j*w + i));
+			gridGeometry.faces.push( new THREE.Face3((j+1)*w + i+1, j*w + i+1, (j+1)*w + i ));
 		}
 	}
 	

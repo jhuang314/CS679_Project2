@@ -2,7 +2,7 @@
 // List.js
 // Ben Reddersen
 // reddersen@wisc.edu
-// Version: v1
+// Version: v1.1
 //========================================
 
 
@@ -43,7 +43,7 @@ function ListIterator(_List){
 	
 	this.removeCurrent = function(){
 		if(this.nodeDeleted){
-			throw twiceDeletedError("Can't delete the same node twice!");
+			throw new UserException("Can't delete the same node twice!");
 		}
 		this._List.deleteNode(this.currentNode);
 		this.nodeDeleted = true;
@@ -51,14 +51,14 @@ function ListIterator(_List){
 	
 	this.addAfterCurrent = function(data){
 		if(this.nodeDeleted){
-			throw addAfterDeletedError("can't add after a deleted element!");
+			throw new UserException("can't add after a deleted element!");
 		}
 		this._List.addAfterNode(this.currentNode,data);				
 	}
 	
 	this.addBeforeCurrent = function(data){
 		if(this.nodeDeleted){
-			throw addBeforeDeletedError("can't add before a deleted element!");
+			throw new UserException("can't add before a deleted element!");
 		}
 		this._List.addBeforeNode(this.currentNode,data);	
 	}

@@ -17,6 +17,8 @@ var container = null; //document.getElementById("container");
 var reqFrame = null;
 
 var playerMesh = null;
+var terrainMesh = null;
+
 
 var mainCamera = null;
 var camXrot = 0;
@@ -30,3 +32,10 @@ var STATE = {
 	ALIVE: 1
 	
 };
+
+function UserException(message) {
+   this.message = message;
+   this.name = "UserException";
+}
+
+var debug12 = 0;

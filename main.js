@@ -47,14 +47,43 @@ function onLoad(){
 	lightSphere.position.set(50, -5, 50);
 	scene.add(lightSphere);
 	 
-	var terrainMesh = new THREE.Mesh( generateTerrain(4,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
-	terrainMesh.position.y = -4;
+	terrainMesh = new THREE.Mesh( generateTerrain(5,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
+	//terrainMesh.position.y = -4;
 	console.log(terrainMesh.material.opacity);
 	//terrainMesh.position.y = 40;
 	terrainMesh.scale.x = 100;
 	terrainMesh.scale.z = 100;
-	terrainMesh.material
+	//terrainMesh.material
 	scene.add (terrainMesh);
+	
+	
+	
+	cubeGeometry = new THREE.CubeGeometry(0.5,0.5,0.5);
+	cubeMaterial = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
+	cubeMaterial2 = new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
+	cubeMaterial3 = new THREE.MeshPhongMaterial({color: 0x880000, ambient: 0x880000, specular: 0x008888, emissive: 0x440000, shininess:3});
+	
+	for( var i = 0; i < 100; i += 2){
+		for( var j = 0; j < 100; j += 2){
+			tempCube = new THREE.Mesh(cubeGeometry,cubeMaterial);
+			var jitterX = 0; //Math.random() * 10 - 5;
+			var jitterY = 0; //Math.random() * 10 - 5;
+			try{
+			    tempCube.position.set(i + jitterX, getTerrainHeight(terrainMesh, i + jitterX, j + jitterY), j + jitterY);
+			    if(debug12 === 1){
+				     tempCube.material = cubeMaterial2;
+				} 
+			}catch (e){
+				tempCube.position.set(i + jitterX, 0, j + jitterY);
+				tempCube.material = cubeMaterial3;
+			}
+			scene.add (tempCube);
+			
+		}
+	}
+	var w12 = terrainMesh.geometry.terrainVars.w
+	var h12 = terrainMesh.geometry.terrainVars.h
+	console.log(terrainMesh.geometry.vertices[0 + (h12 - 1) * w12])
 	
 	/* 
 	for some reason, you need:
