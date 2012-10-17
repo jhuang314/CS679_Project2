@@ -47,7 +47,7 @@ function onLoad(){
 	lightSphere.position.set(50, -5, 50);
 	scene.add(lightSphere);
 	 
-	terrainMesh = new THREE.Mesh( generateTerrain(5,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
+	terrainMesh = new THREE.Mesh( generateTerrain(2,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
 	//terrainMesh.position.y = -4;
 	console.log(terrainMesh.material.opacity);
 	//terrainMesh.position.y = 40;

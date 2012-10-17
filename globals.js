@@ -33,6 +33,17 @@ var STATE = {
 	
 };
 
+// These numbers are not meant to be meaning full, Tests should be done
+// if(type === ELEMENT.PLAYER_BULLET)
+var ELEMENT = {
+	PLAYER_BULLET: 0,
+	ENEMY_SHIP: 1,
+	SCENERY: 2,
+	ENEMY_BULLET: 3,
+	PLAYER: 4,
+	PARTICLE: 5
+}
+
 function UserException(message) {
    this.message = message;
    this.name = "UserException";
