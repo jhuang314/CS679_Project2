@@ -49,7 +49,7 @@ function onLoad(){
 	light2.position.set(50, getTerrainHeight(terrainMesh, 50,50) + 10, 50); 
 	scene.add( light2 );
 
-	scene.fog =	new THREE.Fog( 0x00AAFF, 10, 200 )
+	scene.fog =	new THREE.Fog( 0x00AAFF, 100, 500 )
 	
 	lightSphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhongMaterial({color: 0xff0000, ambient: 0xff0000, specular: 0xff0000, emissive: 0xff0000, shininess:0}));
 	lightSphere.position = light2.position;
