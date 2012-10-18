@@ -24,6 +24,8 @@ var mainCamera = null;
 var camXrot = 0;
 var camYrot = 0;
 
+var keysDown = {}; //holds all keys currently pressed
+
 // function called per loop to update the input
 var updateInput = null;
 
