@@ -57,7 +57,7 @@ function onLoad(){
 	scene.add (terrainMesh);
 	
 	
-	
+	 /*
 	cubeGeometry = new THREE.CubeGeometry(0.5,0.5,0.5);
 	cubeMaterial = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
 	cubeMaterial2 = new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
@@ -84,6 +84,13 @@ function onLoad(){
 	var w12 = terrainMesh.geometry.terrainVars.w
 	var h12 = terrainMesh.geometry.terrainVars.h
 	console.log(terrainMesh.geometry.vertices[0 + (h12 - 1) * w12])
+	*/
+	
+	spawnElement(new BallTest(0.5, 50, getTerrainHeight(terrainMesh, 50,50) + 5, 50), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(0.5,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(0.5,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(0.5,75,getTerrainHeight(terrainMesh, 50,50) + 1,50), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(0.5,50,getTerrainHeight(terrainMesh, 50,50) + 8,75), ELEMENT.PARTICLE );
 	
 	/* 
 	for some reason, you need:
@@ -97,20 +104,35 @@ function onLoad(){
 	I still have not figured out how javascript threading works. 
 	*/
 	jsonLoader.load( "./meshes/fighter_obj.js", function(geo){Player.load(geo);} );
-    spawnObject(null, null);
+    
 	updateInput = addInput();
-
+	startT = Date.now();
 	run();
 }
 
+var startT = 0;
+var elapsedT = 10;
+
 function run() {
+	elapsedT = Date.now() - startT;
+	startT = Date.now();
 	updateInput();
+	
+	/* We have to slow down the Physics or we get results that are
+	too far outside acceptable bounds. Admitedly we could be doing 
+	physics better, but we are where we are. */
+	
+	if(elapsedT > 50){
+		elapsedT == 50;
+	}
+	
+	updateAllElements(elapsedT)
 	renderer.render( scene, mainCamera );
 	
 	if(Player.mesh !== null){
 		Player.mesh.rotation.y -= 0.01;
 		
 	}
-
+	
 	reqFrame(run); 
 }

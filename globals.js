@@ -49,4 +49,3 @@ function UserException(message) {
    this.name = "UserException";
 }
 
-var debug12 = 0;

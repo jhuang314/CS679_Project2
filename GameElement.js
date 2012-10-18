@@ -8,6 +8,8 @@ var GameElement = function(mesh){
 
 }
 
+
+
 GameElement.prototype = {
 	
 	constructor: GameElement,

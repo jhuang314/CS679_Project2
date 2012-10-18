@@ -136,10 +136,7 @@ function nanTest(name, value){
 function getTerrainHeight(terrainMesh, x,z){
 	if("isTerrain" in terrainMesh.geometry){
 	
-		var vget = function(_x,_y){
-			return v[_x + _y * w];
-					
-		}
+		
 	
 		// width in indexes
 	 	var w = terrainMesh.geometry.terrainVars.w;
@@ -150,7 +147,15 @@ function getTerrainHeight(terrainMesh, x,z){
 	 	// convert to mesh coordinates 
 	 	var xm = (x - terrainMesh.position.x ) / terrainMesh.scale.x;
 	 	var zm = (z - terrainMesh.position.z ) / terrainMesh.scale.z;
+		try{
+			var vget = function(_x,_y){
+				return v[_x + _y * w];
+						
+			}
 		
+		}catch(e){
+			console.log(e);
+		}
 		
 				
 		//nanTest("xm", xm);
@@ -193,13 +198,13 @@ function getTerrainHeight(terrainMesh, x,z){
 		var vx0 = vget(xi + 1, zi);
 	 	var vz0 = vget(xi , zi + 1);
 	 	
-	 	debug12 = 0;
+	 
 	 	
 		var xbase = new THREE.Vector3(1/w, vx0.y - v0.y , 1 / h);
 		var zbase = new THREE.Vector3(1/w, vz0.y - v0.y , 1 / h);
 		
 	 	if(db_sqr < da_sqr){
-			debug12 = 1;
+		
 			vx0 = vget(xi, zi + 1);
 			 
 		 	vz0 = vget(xi + 1, zi);
