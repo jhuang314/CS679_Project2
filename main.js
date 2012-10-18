@@ -49,7 +49,7 @@ function onLoad(){
 	light2.position.set(50, getTerrainHeight(terrainMesh, 50,50) + 10, 50); 
 	scene.add( light2 );
 
-	scene.fog =	new THREE.Fog( 0x00AAFF, 100, 500 )
+	scene.fog =	new THREE.Fog( 0x00AAFF, 100, 1000 )
 	
 	lightSphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhongMaterial({color: 0xff0000, ambient: 0xff0000, specular: 0xff0000, emissive: 0xff0000, shininess:0}));
 	lightSphere.position = light2.position;
@@ -64,7 +64,7 @@ function onLoad(){
 	cubeMaterial2 = new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
 	cubeMaterial3 = new THREE.MeshPhongMaterial({color: 0x880000, ambient: 0x880000, specular: 0x008888, emissive: 0x440000, shininess:3});
 	
-	for( var i = 0; i < 100; i += 2){
+	
 		for( var j = 0; j < 100; j += 2){
 			tempCube = new THREE.Mesh(cubeGeometry,cubeMaterial);
 			var jitterX = 0; //Math.random() * 10 - 5;
@@ -86,12 +86,20 @@ function onLoad(){
 	var h12 = terrainMesh.geometry.terrainVars.h
 	console.log(terrainMesh.geometry.vertices[0 + (h12 - 1) * w12])
 	*/
+	for( var i = 0; i < 100; i += 2){
+		var randX = Math.random() * 1000 - 500;
+		var randZ = Math.random() * 1000 - 500;
+		var randR = Math.random() * 5 + Math.random() * 5 + 0.5;
+		
+		var tH = getTerrainHeight(terrainMesh, randX ,randZ);
+		
+		spawnElement(new BallTest(randR, randX, tH + randR + Math.random() * 10 + 1, randZ), ELEMENT.PARTICLE );
+	}
 	
-	spawnElement(new BallTest(0.5, 50, getTerrainHeight(terrainMesh, 50,50) + 5, 50), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(0.2,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(1.5,75,getTerrainHeight(terrainMesh, 50,50) + 3,50), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(1.0,50,getTerrainHeight(terrainMesh, 50,50) + 8,75), ELEMENT.PARTICLE );
+	//spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
+	//spawnElement(new BallTest(0.2,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
+//	spawnElement(new BallTest(1.5,75,getTerrainHeight(terrainMesh, 50,50) + 3,50), ELEMENT.PARTICLE );
+//	spawnElement(new BallTest(1.0,50,getTerrainHeight(terrainMesh, 50,50) + 8,75), ELEMENT.PARTICLE );
 	
 	/* 
 	for some reason, you need:

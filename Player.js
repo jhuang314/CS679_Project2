@@ -10,9 +10,9 @@ var Player = {
 		
 		//playerMesh.rotation.x = Math.PI / 5;
 		//playerMesh.rotation.y = Math.PI / 5;
-		this.mesh.scale.x = 1.7;
-		this.mesh.scale.y = 1.7;
-		this.mesh.scale.z = 1.7;
+		this.mesh.scale.x = 3;
+		this.mesh.scale.y = 3;
+		this.mesh.scale.z = 3;
 		
 		this.isWalking = true;
 		
