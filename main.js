@@ -130,10 +130,5 @@ function run() {
 	updateAllElements(elapsedT)
 	renderer.render( scene, mainCamera );
 	
-	if(Player.mesh !== null){
-		Player.mesh.rotation.y -= 0.01;
-		
-	}
-	
 	reqFrame(run); 
 }

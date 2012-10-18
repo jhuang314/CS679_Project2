@@ -52,13 +52,9 @@ BallTest.prototype = {
 		
 		this.timeAlive += timeElapsed;
 		
-		
-		
 		this.pVec.x += this.vVec.x * timeElapsed * 0.001		
 		this.pVec.y += this.vVec.y * timeElapsed * 0.001
 		this.pVec.z += this.vVec.z * timeElapsed * 0.001
-		
-		
 		
 		this.vVec.x += this.aVec.x * timeElapsed * 0.001		
 		this.vVec.y += this.aVec.y * timeElapsed * 0.001
@@ -100,13 +96,6 @@ BallTest.prototype = {
 			
 			this.counter = 0;
 		}
-		
-			
-		
-						
-		
-		 
-		
 		
 		this.mesh.position = this.pVec;
 		
