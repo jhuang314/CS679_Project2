@@ -93,7 +93,9 @@ function onLoad(){
 		
 		var tH = getTerrainHeight(terrainMesh, randX ,randZ);
 		
-		spawnElement(new BallTest(randR, randX, tH + randR + Math.random() * 10 + 1, randZ), ELEMENT.PARTICLE );
+		var randY = tH + randR + Math.random() * 10 + Math.random() * 10 + 1;
+		
+		spawnElement(new BallTest(randR, randX, randY , randZ), ELEMENT.PARTICLE );
 	}
 	
 	//spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );

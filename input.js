@@ -2,11 +2,10 @@
 
 function addInput(){
 	var mouseDown = false;
-    var dragging = false;
+    
     var dragOrigX = 0;
     var dragOrigY = 0;
-    var dragPixX = 0;
-    var dragPixY = 0;
+    
     var preDragCamRotX = 0;
     var preDragCamRotY = 0;
 
@@ -16,8 +15,14 @@ function addInput(){
             dragOrigX = e.pageX - container.offsetLeft;
             dragOrigY = e.pageY - container.offsetTop;
 
-            preDragCamRotX = camXrot;//mainCamera.rotation.x;
-           	preDragCamRotY = camYrot;//mainCamera.rotation.y;
+			dragPixX = 0;
+            dragPixY = 0;
+            
+            frameDragPixX = 0;
+            frameDragPixY = 0;
+
+            //preDragCamRotX = camXrot;//mainCamera.rotation.x;
+           	//preDragCamRotY = camYrot;//mainCamera.rotation.y;
 			
         }
 
@@ -32,11 +37,13 @@ function addInput(){
 
 	container.addEventListener("mousemove", function (e) {
         if (dragging) {
+        	frameDragPixX =  ((e.pageX - container.offsetLeft) - dragOrigX) - dragPixX;
+            frameDragPixY =  ((e.pageY - container.offsetLeft) - dragOrigY) - dragPixY;
+            
             dragPixX = (e.pageX - container.offsetLeft) - dragOrigX;
             dragPixY = (e.pageY - container.offsetTop) - dragOrigY;
 
-            camXrot = preDragCamRotX + dragPixY * .005;
-            camYrot = preDragCamRotY + dragPixX * .005;
+            
         }
         //mousex = (e.pageX - theCanvas.offsetLeft) - originX;
         //mousey = (e.pageY - theCanvas.offsetTop) - originY;
@@ -47,15 +54,18 @@ function addInput(){
 
     window.addEventListener("keydown", function (e) {
         
+        //console.log(e.keyCode);
+        if(!( e.keyCode in keysDown)){
+			keysDown[e.keyCode] = true;
+		}
         
-        keysDown[e.keyCode] = true;
 
     }, false);
     
     window.addEventListener("keyup", function (e) { delete keysDown[e.keyCode]; }, false);
     
     
-    // called once per fram
+    // called once per frame
     function update(){
     	
     	for(keyKey in keysDown){

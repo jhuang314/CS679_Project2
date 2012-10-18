@@ -24,6 +24,14 @@ var mainCamera = null;
 var camXrot = 0;
 var camYrot = 0;
 
+// input variables 
+var dragging = false;
+var dragPixX = 0;
+var dragPixY = 0;
+
+var frameDragPixX = 0;
+var frameDragPixY = 0;
+
 var keysDown = {}; //holds all keys currently pressed
 
 // function called per loop to update the input
