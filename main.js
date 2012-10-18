@@ -32,29 +32,30 @@ function onLoad(){
 	mainCamera = new THREE.PerspectiveCamera( VIEW_ANGLE, container.offsetWidth / container.offsetHeight, NEAR, FAR );
 	mainCamera.position.set( 0, 2, 3 );
 	mainCamera.eulerOrder = 'YXZ';  // set the order in which the rotations are aplied to the object
+	
+	terrainMesh = new THREE.Mesh( generateTerrain(4,10,10), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
+	terrainMesh.scale.x = 1000;
+	terrainMesh.scale.z = 1000;
+	terrainMesh.position.x = -500;
+	terrainMesh.position.z = -500;
+	scene.add (terrainMesh);
+	
 	// Create a directional light to show off the object
 	var light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(0, 200, 200);
 	scene.add( light );
 	
 	var light2 = new THREE.PointLight( 0xff0000, 10, 50 );
-	light2.position.set(50, -5, 50); 
+	light2.position.set(50, getTerrainHeight(terrainMesh, 50,50) + 10, 50); 
 	scene.add( light2 );
 
 	scene.fog =	new THREE.Fog( 0x00AAFF, 10, 200 )
 	
 	lightSphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhongMaterial({color: 0xff0000, ambient: 0xff0000, specular: 0xff0000, emissive: 0xff0000, shininess:0}));
-	lightSphere.position.set(50, -5, 50);
+	lightSphere.position = light2.position;
 	scene.add(lightSphere);
 	 
-	terrainMesh = new THREE.Mesh( generateTerrain(2,5,5), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
-	//terrainMesh.position.y = -4;
-	console.log(terrainMesh.material.opacity);
-	//terrainMesh.position.y = 40;
-	terrainMesh.scale.x = 100;
-	terrainMesh.scale.z = 100;
-	//terrainMesh.material
-	scene.add (terrainMesh);
+
 	
 	
 	 /*
