@@ -117,7 +117,7 @@ var elapsedT = 10;
 function run() {
 	elapsedT = Date.now() - startT;
 	startT = Date.now();
-	updateInput();
+	
 	
 	/* We have to slow down the Physics or we get results that are
 	too far outside acceptable bounds. Admitedly we could be doing 
@@ -127,7 +127,8 @@ function run() {
 		elapsedT == 50;
 	}
 	
-	updateAllElements(elapsedT)
+	updateAllElements(elapsedT);
+	updateInput();
 	renderer.render( scene, mainCamera );
 	
 	reqFrame(run); 

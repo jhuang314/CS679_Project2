@@ -65,14 +65,24 @@ var Player = {
         if ( 69 in keysDown) {	//E
             mainCamera.position.y -= speed;
         }
-        try{
-			mainCamera.position.y = getTerrainHeight(terrainMesh, mainCamera.position.x, mainCamera.position.z) + 2;
-			//console.log(temp);
-			
-		} catch (e){
-		   //console.log(e.message)
+        
+        if(32 in keysDown && keysDown[32]){
+			mainCamera.position.y += 2;				
 		}
+        
+        var tH = 0;
+        
+        try{
+        	tH = getTerrainHeight(terrainMesh, mainCamera.position.x, mainCamera.position.z);
+			
+		} catch (e){}// in case we are off the mesh
 		
+		if(mainCamera.position.y - 2 > tH){
+			mainCamera.position.y -= 0.1;
+		} else {
+			mainCamera.position.y = tH + 2;
+		}
+		 
         
 	    mainCamera.updateMatrix();	
 	}

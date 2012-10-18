@@ -44,10 +44,10 @@ function addInput(){
     }, false);
 
 
+
     window.addEventListener("keydown", function (e) {
-        //if (!(e.keyCode in keysDown)) {
-        //    firstKeyHit(e.keyCode);
-        //}
+        
+        
         keysDown[e.keyCode] = true;
 
     }, false);
@@ -58,6 +58,10 @@ function addInput(){
     // called once per fram
     function update(){
     	
+    	for(keyKey in keysDown){
+			keysDown[keyKey] = false;
+		}
+		
 	}
     
     
