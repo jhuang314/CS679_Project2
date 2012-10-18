@@ -39,10 +39,7 @@ BallTest.prototype = {
 	},
 
 	update: function ( timeElapsed ) {
-		if(debug11 >=0 ){
-			console.log("Location " + this.pVec.y);
-			debug11 --;
-		}
+	
 		
 		this.timeAlive += timeElapsed;
 		
@@ -52,18 +49,14 @@ BallTest.prototype = {
 		this.pVec.y += this.vVec.y * timeElapsed * 0.001
 		this.pVec.z += this.vVec.z * timeElapsed * 0.001
 		
-		if(debug12 >=0 ){
-			console.log("Location New " + this.pVec.y);
-			console.log("Velocity " + this.vVec.y);
-			console.log("TimeElapsed " + timeElapsed );
-			debug12 --;
-		}
+		
 		
 		this.vVec.x += this.aVec.x * timeElapsed * 0.001		
 		this.vVec.y += this.aVec.y * timeElapsed * 0.001
 		this.vVec.z += this.aVec.z * timeElapsed * 0.001
 		
 		var tH = 0;
+		
 		try{
 			tH = getTerrainHeight(terrainMesh, this.pVec.x, this.pVec.z);
 		} catch (e) {
@@ -73,7 +66,7 @@ BallTest.prototype = {
 		
 		if(this.pVec.y - this.radius < tH){
 		    
-		    var overShoot = tH - this.pVec.y;
+		    var overShoot = tH - this.pVec.y + this.radius ;
 		    
 			this.pVec.y = tH + this.radius;
 			
