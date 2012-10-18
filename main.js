@@ -87,10 +87,10 @@ function onLoad(){
 	*/
 	
 	spawnElement(new BallTest(0.5, 50, getTerrainHeight(terrainMesh, 50,50) + 5, 50), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(0.5,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(0.5,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(0.5,75,getTerrainHeight(terrainMesh, 50,50) + 1,50), ELEMENT.PARTICLE );
-	spawnElement(new BallTest(0.5,50,getTerrainHeight(terrainMesh, 50,50) + 8,75), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(0.2,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(1.5,75,getTerrainHeight(terrainMesh, 50,50) + 3,50), ELEMENT.PARTICLE );
+	spawnElement(new BallTest(1.0,50,getTerrainHeight(terrainMesh, 50,50) + 8,75), ELEMENT.PARTICLE );
 	
 	/* 
 	for some reason, you need:

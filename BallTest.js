@@ -2,6 +2,14 @@
 
 var BallTest = function(radius, x, y, z){
 	
+	// we'll use conservation of energy to compinsate for sampling errors 
+	// define mass to be 1 kg, energy is in joules
+	// since particle is at rest at time t = 0, energy is purely potential
+	this.energy = 1 * 9.81 * (y - radius);   
+
+	// check energy of system every n frames	
+	this.recalcTime = 50;
+	this.counter = 0;
 	
 	this.timeAlive = 0;
 	
@@ -40,6 +48,7 @@ BallTest.prototype = {
 
 	update: function ( timeElapsed ) {
 	
+		this.counter ++;
 		
 		this.timeAlive += timeElapsed;
 		
@@ -63,15 +72,41 @@ BallTest.prototype = {
 		
 		}		
 		
+		// use this to fix the energy
+		var bounce = false;
 		
 		if(this.pVec.y - this.radius < tH){
-		    
-		    var overShoot = tH - this.pVec.y + this.radius ;
-		    
+		    bounce = true; 
 			this.pVec.y = tH + this.radius;
 			
 			this.vVec.multiplyScalar(-1);	
 		}
+		
+		if(bounce){
+		    // recalculate energy of system:
+			var new_P_E = (9.81) * (this.pVec.y - this.radius);
+			var new_K_E = 0.5 * Math.pow(this.vVec.y, 0);
+			
+			if(this.energy - new_P_E >= 0){
+				var vMag = Math.sqrt( 2 * (this.energy - new_P_E ));
+				if(Math.abs(this.vVec.y) > 0.00001){
+					this.vVec.y = vMag * this.vVec.y / Math.abs(this.vVec.y);
+				}
+			} else {
+			    this.pVec.y = (this.energy - new_K_E) / (9.81);
+			}
+			
+			
+			
+			this.counter = 0;
+		}
+		
+			
+		
+						
+		
+		 
+		
 		
 		this.mesh.position = this.pVec;
 		
