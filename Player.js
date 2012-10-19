@@ -84,7 +84,21 @@ var Player = {
 			this.fly_dir.y -= timeElapsed * 0.001 * 1;
 			
 		}
+		if ( 83 in keysDown) {	// S
+            
+			this.flySpeed = 20;
+			
+		} else {
+		    this.flySpeed = 40;
+		}
 		
+		if ( 87 in keysDown) {	// W
+            
+			this.flySpeed = 60;
+			
+		} else {
+		    this.flySpeed = 40;
+		}
 		
 		
 		this.mesh.rotation = this.fly_dir;
