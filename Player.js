@@ -88,17 +88,14 @@ var Player = {
             
 			this.flySpeed = 20;
 			
-		} else {
-		    this.flySpeed = 40;
-		}
-		
-		if ( 87 in keysDown) {	// W
+		} else 	if ( 87 in keysDown) {	// W
             
 			this.flySpeed = 60;
 			
-		} else {
+		}else {
 		    this.flySpeed = 40;
 		}
+	
 		
 		
 		this.mesh.rotation = this.fly_dir;
