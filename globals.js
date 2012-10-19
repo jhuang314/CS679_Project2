@@ -59,3 +59,12 @@ function UserException(message) {
    this.name = "UserException";
 }
 
+
+function distanceSqrd(v1, v2){
+	var sqrd = function(x){
+		return Math.pow(x, 2);	
+	};
+	
+	return sqrd(v1.x - v2.x) + sqrd(v1.y - v2.y) + sqrd(v1.z - v2.z)
+
+}

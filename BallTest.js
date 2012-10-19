@@ -19,6 +19,8 @@ var BallTest = function(radius, x, y, z){
 	
 	var material = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
 	
+	this.collisionMaterial =  new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
+	
 	this.mesh = new THREE.Mesh(geometry, material);
 	
 	this.pVec = new THREE.Vector3(x,y,z);
@@ -49,6 +51,19 @@ BallTest.prototype = {
 	update: function ( timeElapsed ) {
 	
 		this.counter ++;
+		
+		if (!Player.isWalking){
+			try{ // try block because Player doesn't get loaded until later. 
+				if(distanceSqrd(Player.fly_pVec, this.pVec) < Math.pow(this.radius + 5, 2)){
+					this.mesh.material = this.collisionMaterial;
+					
+				}
+			}catch(e){
+				console.log(e.message)
+			}
+			
+		}
+		
 		
 		this.timeAlive += timeElapsed;
 		
