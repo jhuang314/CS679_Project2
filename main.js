@@ -55,7 +55,7 @@ function onLoad(){
 	lightSphere.position = light2.position;
 	scene.add(lightSphere);	
 	
-	sound1 = new Sound( ['techno.mp3'], 50, 1 );
+	sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
 	sound1.position.copy( lightSphere.position );
 	sound1.play();
 	 /*
