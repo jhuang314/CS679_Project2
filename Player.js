@@ -33,7 +33,7 @@ var Player = {
 		
 		//this.fly_vVec = new THREE.Vector3(10,0,0);
 		this.fly_dir = new THREE.Vector3(0,0,0);
-		this.flySpeed = 10;
+		this.flySpeed = 40;
 		
 		
 		// mesh stuff
@@ -52,6 +52,13 @@ var Player = {
 		} else {
 		    this.updateFlying(timeElapsed);
 		}
+		
+		if ( 70 in keysDown && keysDown[70]) {	// F
+            this.isWalking = !this.isWalking;
+            this.pVecWalk.x = this.fly_pVec.x;
+            this.pVecWalk.z = this.fly_pVec.z;
+            this.pVecWalk.y = getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);
+        }
 		
 	    mainCamera.updateMatrix();	
 	},
