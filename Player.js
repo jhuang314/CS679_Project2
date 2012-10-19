@@ -15,19 +15,30 @@ var Player = {
 		this.walkVY = 0; // velocity in the y direction
 	
 		this.groundContact = false;
-	
-		//this.vVecWalk = new THREE.Vector3(0,0,0);
-		//this.aVecWalk = new THREE.Vector3(0,0,0);
+		
+		var rotationFix = new THREE.Matrix4();
+		rotationFix.rotateY(Math.PI);
+		geometry.applyMatrix(rotationFix);
 		
 		this.mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 		
 		this.mesh.scale.x = 3;
 		this.mesh.scale.y = 3;
 		this.mesh.scale.z = 3;
+		this.isWalking = false;//true;
 		
-		this.isWalking = true;
+		// flying vectors and things:
 		
-		this.mesh.position = new THREE.Vector3(0,getTerrainHeight(terrainMesh, 0, -50) + 10,-50);
+		this.fly_pVec = new THREE.Vector3(0,getTerrainHeight(terrainMesh, 0, -50) + 10,-50);
+		
+		//this.fly_vVec = new THREE.Vector3(10,0,0);
+		this.fly_dir = new THREE.Vector3(0,0,0);
+		this.flySpeed = 10;
+		
+		
+		// mesh stuff
+		
+		this.mesh.position = this.fly_pVec;
 		scene.add(this.mesh);
 		
 		spawnElement(this, ELEMENT.PLAYER);
@@ -35,11 +46,44 @@ var Player = {
 	},
 	
 	update: function(timeElapsed){
-		
-		this.updateWalking(timeElapsed);
+		if(this.isWalking){
+			this.updateWalking(timeElapsed);
         
+		} else {
+		    this.updateFlying(timeElapsed);
+		}
+		
 	    mainCamera.updateMatrix();	
 	},
+	
+	// ================== F L Y I N G ==================
+	
+	updateFlying: function(timeElapsed){
+		
+		
+		
+		this.fly_pVec.z -= Math.cos(this.fly_dir.y) * this.flySpeed * timeElapsed * 0.001;
+    	this.fly_pVec.x -= Math.sin(this.fly_dir.y ) * this.flySpeed * timeElapsed * 0.001;
+             
+		if ( 65 in keysDown) {	//Left
+            //this.rotWalk.x += frameDragPixY * 0.005;
+			this.fly_dir.y += timeElapsed * 0.001 * 1;
+        }
+        if ( 68 in keysDown) {	//Right
+            //this.rotWalk.x += frameDragPixY * 0.005;
+			this.fly_dir.y -= timeElapsed * 0.001 * 1;
+			
+		}
+		
+		
+		
+		this.mesh.rotation = this.fly_dir;
+		mainCamera.position.set(this.fly_pVec.x + 20, this.fly_pVec.y + 10, this.fly_pVec.z + 20);
+		
+		mainCamera.lookAt(this.fly_pVec); 	
+	},
+	
+	// ============= W A L K I N G ====================
 	
 	updateWalking: function(timeElapsed){
 		this.mesh.rotation.y -= 0.01;
@@ -116,7 +160,7 @@ var Player = {
 		} 
 		
 		
-		if (this.pVecWalk.y - 2 < tH + 0.1 ){ 
+		if (this.pVecWalk.y - 2 < tH + 0.5 ){ 
 			this.groundContact = true;
 		} else {
 			this.groundContact = false;
