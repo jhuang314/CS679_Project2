@@ -64,7 +64,10 @@ var Player = {
 		
 		this.fly_pVec.z -= Math.cos(this.fly_dir.y) * this.flySpeed * timeElapsed * 0.001;
     	this.fly_pVec.x -= Math.sin(this.fly_dir.y ) * this.flySpeed * timeElapsed * 0.001;
-             
+        
+		
+		
+		     
 		if ( 65 in keysDown) {	//Left
             //this.rotWalk.x += frameDragPixY * 0.005;
 			this.fly_dir.y += timeElapsed * 0.001 * 1;
@@ -78,7 +81,11 @@ var Player = {
 		
 		
 		this.mesh.rotation = this.fly_dir;
-		mainCamera.position.set(this.fly_pVec.x + 20, this.fly_pVec.y + 10, this.fly_pVec.z + 20);
+		
+		var cX = Math.sin(this.fly_dir.y) * 30;
+		var cZ = Math.cos(this.fly_dir.y) * 30;
+		
+		mainCamera.position.set(this.fly_pVec.x + cX, this.fly_pVec.y + 10, this.fly_pVec.z + cZ);
 		
 		mainCamera.lookAt(this.fly_pVec); 	
 	},
