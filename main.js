@@ -23,6 +23,9 @@ function onLoad(){
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setSize(container.offsetWidth, container.offsetHeight);
 	renderer.setClearColorHex(0x0088ff, 1);
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapSoft = true;
+	
 	container.appendChild( renderer.domElement );
 	
 	// Create a new Three.js scene
@@ -41,6 +44,7 @@ function onLoad(){
 	
 	
 	terrainMesh = new THREE.Mesh( terrainGeometry, terrainMaterial);
+	terrainMesh.receiveShadow = true;
 	terrainMesh.scale.x = 1000;
 	terrainMesh.scale.z = 1000;
 	terrainMesh.position.x = -500;
@@ -50,6 +54,9 @@ function onLoad(){
 	// Create a directional light to show off the object
 	var light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(0, 200, 200);
+	light.castShadow = true;
+	light.shadowDarkness = 0.5;
+	//light.shadowCameraVisible = true;
 	scene.add( light );
 	
 	var light2 = new THREE.PointLight( 0xff0000, 10, 50 );

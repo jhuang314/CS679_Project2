@@ -22,7 +22,7 @@ var BallTest = function(radius, x, y, z){
 	this.collisionMaterial =  new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
 	
 	this.mesh = new THREE.Mesh(geometry, material);
-	
+	this.mesh.castShadow = true; 
 	this.pVec = new THREE.Vector3(x,y,z);
 	
 	this.mesh.position = this.pVec;
