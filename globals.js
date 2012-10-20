@@ -68,3 +68,13 @@ function distanceSqrd(v1, v2){
 	return sqrd(v1.x - v2.x) + sqrd(v1.y - v2.y) + sqrd(v1.z - v2.z)
 
 }
+//Float modulo division
+function fm(val,div){
+	if(div <= 0){
+		throw UserException("fm: div must be greater than 0");
+	}
+	while(val > div){
+		val -= div;
+	}
+	return val;
+}

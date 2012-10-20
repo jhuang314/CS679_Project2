@@ -33,7 +33,14 @@ function onLoad(){
 	mainCamera.position.set( 0, 2, 3 );
 	mainCamera.eulerOrder = 'YXZ';  // set the order in which the rotations are aplied to the object
 	
-	terrainMesh = new THREE.Mesh( generateTerrain(4,10,10), new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) );
+	terrainGeometry = generateTerrain(3,20,20);
+	
+	var map = THREE.ImageUtils.loadTexture('textures/grass2.png', new THREE.UVMapping(), function() {renderer.render(scene);})
+	
+	terrainMaterial = new THREE.MeshPhongMaterial({ map: map,  shininess:0 }); //new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) 
+	
+	
+	terrainMesh = new THREE.Mesh( terrainGeometry, terrainMaterial);
 	terrainMesh.scale.x = 1000;
 	terrainMesh.scale.z = 1000;
 	terrainMesh.position.x = -500;

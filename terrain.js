@@ -244,6 +244,8 @@ function generateTerrain(order, rows, cols){
 	// when we have a more complex terrain generator.
 	var w = Math.pow(2, order) * rows + 1;
 	var h = Math.pow(2, order) * cols + 1;
+	
+	var Or = Math.pow(2, order) ;
 		
 	var gridGeometry = new THREE.Geometry();
 	
@@ -279,8 +281,32 @@ function generateTerrain(order, rows, cols){
 			v  |3/1  3|
 			   +------+
 			================*/
+			
+			var u1 = (i%Or)/Or ;
+			var u2 = u1 + 1/Or ;
+			
+			var v1 = (j%Or)/Or ;
+			var v2 = v1 + 1/Or ;
+			
+			if(v2 > 1){
+				console.log(i + ", " + j + " - " + Or);
+			}
+			
 			gridGeometry.faces.push( new THREE.Face3( (j+1)*w + i, j*w + i+1, j*w + i));
+			gridGeometry.faceVertexUvs[ 0 ].push( [
+				new THREE.UV( u1 , v2 ),
+				new THREE.UV( u2 , v1 ),
+				new THREE.UV( u1 , v1 )
+				] );
+				
+				
 			gridGeometry.faces.push( new THREE.Face3((j+1)*w + i+1, j*w + i+1, (j+1)*w + i ));
+			
+			gridGeometry.faceVertexUvs[ 0 ].push( [
+				new THREE.UV( u2 , v2 ),
+				new THREE.UV( u2 , v1 ),
+				new THREE.UV( u1 , v2 )
+				] );
 		}
 	}
 	
