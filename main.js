@@ -60,11 +60,11 @@ function onLoad(){
 	
 	lightSphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhongMaterial({color: 0xff0000, ambient: 0xff0000, specular: 0xff0000, emissive: 0xff0000, shininess:0}));
 	lightSphere.position = light2.position;
-	scene.add(lightSphere);
-	 
-
+	scene.add(lightSphere);	
 	
-	
+	sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
+	sound1.position.copy( lightSphere.position );
+	sound1.play();
 	 /*
 	cubeGeometry = new THREE.CubeGeometry(0.5,0.5,0.5);
 	cubeMaterial = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
@@ -128,6 +128,31 @@ function onLoad(){
 	run();
 }
 
+var Sound = function ( sources, radius, volume ) {
+	var audio = document.createElement( 'audio' );
+
+	for ( var i = 0; i < sources.length; i ++ ) {
+		var source = document.createElement( 'source' );
+		source.src = sources[ i ];
+		audio.appendChild( source );
+	}
+
+	this.position = new THREE.Vector3();
+
+	this.play = function () {
+		audio.play();
+	}
+	this.update = function ( camera ) {
+		var distance = this.position.distanceTo( camera.position );
+		if ( distance <= radius ) {
+			audio.volume = volume * ( 1 - distance / radius );
+
+		} else {
+			audio.volume = 0;
+		}
+	}
+}		
+
 var startT = 0;
 var elapsedT = 10;
 
@@ -143,6 +168,8 @@ function run() {
 	if(elapsedT > 50){
 		elapsedT == 50;
 	}
+	
+	sound1.update(mainCamera);
 	
 	updateAllElements(elapsedT);
 	updateInput();
