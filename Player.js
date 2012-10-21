@@ -106,10 +106,16 @@ var Player = {
 		var cX = Math.sin(this.fly_dir.y) * 30;
 		var cZ = Math.cos(this.fly_dir.y) * 30;
 		
-		//light.shadowCameraRight = this.fly_pVec.x + 100;
-		//light.shadowCameraLeft = this.fly_pVec.x + -100;
-		//light.shadowCameraTop = this.fly_pVec.z + 100;
-		//light.shadowCameraBottom = this.fly_pVec.z + -100; 
+		light.shadowCamera.right = 100 + this.fly_pVec.x ;
+		light.shadowCamera.left = -100 + this.fly_pVec.x ;
+		
+		light.shadowCamera.top = 100 - this.fly_pVec.z * 0.7071067811865476;
+		light.shadowCamera.bottom = -100 - this.fly_pVec.z * 0.7071067811865476; 
+       	
+		light.shadowCamera.near = 0 - this.fly_pVec.z * 0.7071067811865476;
+		light.shadowCamera.far = 1000 - this.fly_pVec.z * 0.7071067811865476; 
+		
+	   	light.shadowCamera.updateProjectionMatrix();
 		
 		mainCamera.position.set(this.fly_pVec.x + cX, this.fly_pVec.y + 10, this.fly_pVec.z + cZ);
 		
@@ -160,14 +166,6 @@ var Player = {
             this.pVecWalk.x += Math.cos(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
         }
         
-       	//light.position.set(this.pVecWalk.x, this.pVecWalk.y + 100,this.pVecWalk.z + 100);
-       	light.shadowCamera.right = 100 + this.pVecWalk.x;
-		light.shadowCamera.left = -100 + this.pVecWalk.x;
-		light.shadowCamera.top = 100 - this.pVecWalk.z;
-		light.shadowCamera.bottom = -100 - this.pVecWalk.z; 
-       
-	   	light.shadowCamera.updateProjectionMatrix();
-	    
         // these shortcut physics
         if ( 81 in keysDown) {	//Q
             this.pVecWalk.y += this.walkSpeed * timeElapsed * 0.001;
@@ -204,6 +202,18 @@ var Player = {
 		} else {
 			this.groundContact = false;
 		} 
+		
+		light.shadowCamera.right = 100 + this.pVecWalk.x ;
+		light.shadowCamera.left = -100 + this.pVecWalk.x ;
+		
+		light.shadowCamera.top = 100 - this.pVecWalk.z * 0.7071067811865476;
+		light.shadowCamera.bottom = -100 - this.pVecWalk.z * 0.7071067811865476; 
+       	
+		light.shadowCamera.near = 0 - this.pVecWalk.z * 0.7071067811865476;
+		light.shadowCamera.far = 1000 - this.pVecWalk.z * 0.7071067811865476; 
+		
+	   	light.shadowCamera.updateProjectionMatrix();
+		
 		mainCamera.rotation = this.rotWalk;
 		mainCamera.position = this.pVecWalk;	
 	
