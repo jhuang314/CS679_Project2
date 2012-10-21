@@ -36,7 +36,7 @@ function onLoad(){
 	mainCamera.position.set( 0, 2, 3 );
 	mainCamera.eulerOrder = 'YXZ';  // set the order in which the rotations are aplied to the object
 	
-	terrainGeometry = generateTerrain(3,20,20);
+	terrainGeometry = generateTerrain(2,40,40);
 	
 	var map = THREE.ImageUtils.loadTexture('textures/grass2.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 	
@@ -52,11 +52,16 @@ function onLoad(){
 	scene.add (terrainMesh);
 	
 	// Create a directional light to show off the object
-	var light = new THREE.DirectionalLight( 0xffffff, 1.5);
+	light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(0, 200, 200);
 	light.castShadow = true;
 	light.shadowDarkness = 0.5;
-	//light.shadowCameraVisible = true;
+	light.shadowCameraRight = 100 ;
+	light.shadowCameraLeft = -100 ;
+	light.shadowCameraTop = 100 ;
+	light.shadowCameraBottom = -100 ; 
+	
+	light.shadowCameraVisible = true;
 	scene.add( light );
 	
 	var light2 = new THREE.PointLight( 0xff0000, 10, 50 );

@@ -25,6 +25,7 @@ var Player = {
 		this.mesh.scale.x = 3;
 		this.mesh.scale.y = 3;
 		this.mesh.scale.z = 3;
+		this.mesh.castShadow = true;
 		this.isWalking = false;//true;
 		
 		// flying vectors and things:
@@ -59,6 +60,8 @@ var Player = {
             this.pVecWalk.z = this.fly_pVec.z;
             this.pVecWalk.y = getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);
         }
+		
+		
 		
 	    mainCamera.updateMatrix();	
 	},
@@ -102,6 +105,11 @@ var Player = {
 		
 		var cX = Math.sin(this.fly_dir.y) * 30;
 		var cZ = Math.cos(this.fly_dir.y) * 30;
+		
+		//light.shadowCameraRight = this.fly_pVec.x + 100;
+		//light.shadowCameraLeft = this.fly_pVec.x + -100;
+		//light.shadowCameraTop = this.fly_pVec.z + 100;
+		//light.shadowCameraBottom = this.fly_pVec.z + -100; 
 		
 		mainCamera.position.set(this.fly_pVec.x + cX, this.fly_pVec.y + 10, this.fly_pVec.z + cZ);
 		
@@ -152,8 +160,14 @@ var Player = {
             this.pVecWalk.x += Math.cos(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
         }
         
-        
-        
+       	//light.position.set(this.pVecWalk.x, this.pVecWalk.y + 100,this.pVecWalk.z + 100);
+       	light.shadowCamera.right = 100 + this.pVecWalk.x;
+		light.shadowCamera.left = -100 + this.pVecWalk.x;
+		light.shadowCamera.top = 100 - this.pVecWalk.z;
+		light.shadowCamera.bottom = -100 - this.pVecWalk.z; 
+       
+	   	light.shadowCamera.updateProjectionMatrix();
+	    
         // these shortcut physics
         if ( 81 in keysDown) {	//Q
             this.pVecWalk.y += this.walkSpeed * timeElapsed * 0.001;

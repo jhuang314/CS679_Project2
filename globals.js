@@ -78,3 +78,5 @@ function fm(val,div){
 	}
 	return val;
 }
+
+var light = null;
