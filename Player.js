@@ -21,7 +21,7 @@ var Player = {
 		geometry.applyMatrix(rotationFix);
 		
 		this.mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
-		
+		this.mesh.eulerOrder = 'YXZ';
 		this.mesh.scale.x = 3;
 		this.mesh.scale.y = 3;
 		this.mesh.scale.z = 3;
@@ -101,7 +101,12 @@ var Player = {
 		}else {
 		    //this.flySpeed = 40;
 		}
-	
+	    
+		if(this.fly_dir.x > Math.PI / 2){
+			this.fly_dir.x = Math.PI/ 2;		                    
+		} else if (this.fly_dir.x < -Math.PI / 2){
+			this.fly_dir.x = -Math.PI/ 2;
+		}
 		
 		
 		this.mesh.rotation = this.fly_dir;
