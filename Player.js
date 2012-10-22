@@ -17,7 +17,7 @@ var Player = {
 		this.groundContact = false;
 		
 		var rotationFix = new THREE.Matrix4();
-		rotationFix.rotateY(Math.PI);
+		//rotationFix.rotateY(-Math.PI);
 		geometry.applyMatrix(rotationFix);
 		
 		this.mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
@@ -36,6 +36,7 @@ var Player = {
 		this.fly_dir = new THREE.Vector3(0,0,0);
 		this.flySpeed = 40;
 		
+		this.flyRotMat4 = new THREE.Matrix4();
 		
 		// mesh stuff
 		
@@ -70,41 +71,52 @@ var Player = {
 	
 	updateFlying: function(timeElapsed){
 		
+		this.flyRotMat4.setRotationFromEuler(this.fly_dir,"YXZ");
 		
+		var vVec = new THREE.Vector3(0,0,this.flySpeed);
+		vVec = this.flyRotMat4.multiplyVector3(vVec);		
 		
-		this.fly_pVec.z -= Math.cos(this.fly_dir.y) * this.flySpeed * timeElapsed * 0.001;
-    	this.fly_pVec.x -= Math.sin(this.fly_dir.y ) * this.flySpeed * timeElapsed * 0.001;
-        
+		this.fly_pVec.addSelf(vVec.multiplyScalar(timeElapsed * 0.001));
 		
-		
-		     
-		if ( 65 in keysDown) {	//Left
-            //this.rotWalk.x += frameDragPixY * 0.005;
+		//this.fly_pVec.z -= Math.cos(this.fly_dir.y) * this.flySpeed * timeElapsed * 0.001;
+    	//this.fly_pVec.x -= Math.sin(this.fly_dir.y ) * this.flySpeed * timeElapsed * 0.001;
+             
+		if ( 65 in keysDown) {	//A
+            
 			this.fly_dir.y += timeElapsed * 0.001 * 1;
         }
-        if ( 68 in keysDown) {	//Right
-            //this.rotWalk.x += frameDragPixY * 0.005;
+        if ( 68 in keysDown) {	//D
+            
 			this.fly_dir.y -= timeElapsed * 0.001 * 1;
 			
 		}
 		if ( 83 in keysDown) {	// S
-            
-			this.flySpeed = 20;
+            this.fly_dir.x += timeElapsed * 0.001 * 1;
+			//this.flySpeed = 20;
 			
 		} else 	if ( 87 in keysDown) {	// W
-            
-			this.flySpeed = 60;
+            this.fly_dir.x -= timeElapsed * 0.001 * 1;
+			//this.flySpeed = 60;
 			
 		}else {
-		    this.flySpeed = 40;
+		    //this.flySpeed = 40;
 		}
 	
 		
 		
 		this.mesh.rotation = this.fly_dir;
 		
-		var cX = Math.sin(this.fly_dir.y) * 30;
-		var cZ = Math.cos(this.fly_dir.y) * 30;
+		var tH = 0;
+        
+        try{
+        	tH = getTerrainHeight(terrainMesh, this.fly_pVec.x, this.fly_pVec.z);
+			
+		} catch (e){}// in case we are off the mesh
+		
+		if(this.fly_pVec.y - 2 < tH){
+			this.fly_pVec.y = tH + 2;
+			
+		}
 		
 		light.shadowCamera.right = 100 + this.fly_pVec.x ;
 		light.shadowCamera.left = -100 + this.fly_pVec.x ;
@@ -117,7 +129,10 @@ var Player = {
 		
 	   	light.shadowCamera.updateProjectionMatrix();
 		
-		mainCamera.position.set(this.fly_pVec.x + cX, this.fly_pVec.y + 10, this.fly_pVec.z + cZ);
+		var cX = Math.sin(this.fly_dir.y) * 30;
+		var cZ = Math.cos(this.fly_dir.y) * 30;
+		
+		mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
 		
 		mainCamera.lookAt(this.fly_pVec); 	
 	},
