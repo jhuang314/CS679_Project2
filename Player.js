@@ -85,19 +85,19 @@ var Player = {
              
 		if ( 65 in keysDown) {	//A
 			this.fly_dir.y += timeElapsed * 0.001 * 1;
-			this.flyRoll -= timeElapsed * 0.001 * 0.5;
+			this.flyRoll -= timeElapsed * 0.001 * 1;
         } else if ( 68 in keysDown) {	//D
             
 			this.fly_dir.y -= timeElapsed * 0.001 * 1;
-			this.flyRoll += timeElapsed * 0.001 * 0.5;
+			this.flyRoll += timeElapsed * 0.001 * 1;
 		} else {
 			if(this.flyRoll < 0.1){
-				this.flyRoll += timeElapsed * 0.001 * 0.5;
+				this.flyRoll += timeElapsed * 0.001 * 1;
 				if(this.flyRoll > 0){
 				   this.flyRoll = 0;
 				}
 			} else if(this.flyRoll > 0.1){
-				this.flyRoll -= timeElapsed * 0.001 * 0.5;
+				this.flyRoll -= timeElapsed * 0.001 * 1;
 				if(this.flyRoll < 0){
 				   this.flyRoll = 0;
 				}
