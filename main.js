@@ -120,7 +120,8 @@ function onLoad(){
 	spawnElement(new BoxTest(100, 0, 100, 100,50,70), ELEMENT.SCENERY);
 	for( var i = 0; i < 50; i += 2){
 	  	spawnElement(new BoxTest(100, 25 - i/4 - .5, 135 + 4 * i + 4, 10 , 1, 8), ELEMENT.SCENERY);
-	
+	    
+		spawnElement(new BoxTest(112, 25 - i/4 - .5, 135 + 4 * i + 4, 10 , 1, 8), ELEMENT.SCENERY);
 	}
 	
 	

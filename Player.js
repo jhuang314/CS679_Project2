@@ -144,16 +144,7 @@ var Player = {
 			
 		}
 		
-		light.shadowCamera.right = 100 + this.fly_pVec.x ;
-		light.shadowCamera.left = -100 + this.fly_pVec.x ;
-		
-		light.shadowCamera.top = 100 - this.fly_pVec.z * 0.7071067811865476;
-		light.shadowCamera.bottom = -100 - this.fly_pVec.z * 0.7071067811865476; 
-       	
-		light.shadowCamera.near = 0 - this.fly_pVec.z * 0.7071067811865476;
-		light.shadowCamera.far = 1000 - this.fly_pVec.z * 0.7071067811865476; 
-		
-	   	light.shadowCamera.updateProjectionMatrix();
+		this.setShadowCam(this.fly_pVec);
 		
 		var cX = Math.sin(this.fly_dir.y) * 30;
 		var cZ = Math.cos(this.fly_dir.y) * 30;
@@ -243,20 +234,34 @@ var Player = {
 		} else {
 			this.groundContact = false;
 		} 
+		this.setShadowCam(this.pVecWalk);
+		//light.shadowCamera.right = 100 + this.pVecWalk.x ;
+		//light.shadowCamera.left = -100 + this.pVecWalk.x ;
 		
-		light.shadowCamera.right = 100 + this.pVecWalk.x ;
-		light.shadowCamera.left = -100 + this.pVecWalk.x ;
-		
-		light.shadowCamera.top = 100 - this.pVecWalk.z * 0.7071067811865476;
-		light.shadowCamera.bottom = -100 - this.pVecWalk.z * 0.7071067811865476; 
+		//light.shadowCamera.top = 100 - this.pVecWalk.z * 0.7071067811865476;
+		//light.shadowCamera.bottom = -100 - this.pVecWalk.z * 0.7071067811865476; 
        	
-		light.shadowCamera.near = 0 - this.pVecWalk.z * 0.7071067811865476;
-		light.shadowCamera.far = 1000 - this.pVecWalk.z * 0.7071067811865476; 
+		//light.shadowCamera.near = 0 - this.pVecWalk.z * 0.7071067811865476;
+		//light.shadowCamera.far = 1000 - this.pVecWalk.z * 0.7071067811865476; 
 		
-	   	light.shadowCamera.updateProjectionMatrix();
+	   	//light.shadowCamera.updateProjectionMatrix();
 		
 		mainCamera.rotation = this.rotWalk;
 		mainCamera.position = this.pVecWalk;	
+	
+	},
+	
+	setShadowCam: function(vec){
+	   	light.shadowCamera.right = 128 + Math.floor(vec.x * .25) * 4;
+		light.shadowCamera.left = -128 + Math.floor(vec.x * .25) * 4;
+		
+		light.shadowCamera.top = 128 - Math.floor(vec.z * 0.7071067811865476 * .25) * 4;
+		light.shadowCamera.bottom = -128 - Math.floor(vec.z * 0.7071067811865476 * .25)* 4; 
+       	
+		light.shadowCamera.near = 0 - vec.z * 0.7071067811865476;
+		light.shadowCamera.far = 1000 - vec.z * 0.7071067811865476; 
+		
+	   	light.shadowCamera.updateProjectionMatrix();
 	
 	}
 	
