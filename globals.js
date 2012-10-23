@@ -79,4 +79,9 @@ function fm(val,div){
 	return val;
 }
 
+function eqlsTol(a, b , tol){
+	return Math.abs(a - b) < tol;
+
+}
+
 var light = null;

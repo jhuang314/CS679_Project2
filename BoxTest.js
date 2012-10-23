@@ -16,7 +16,7 @@ var BoxTest = function(x,y,z, w,h,l){
 	this.pVec = new THREE.Vector3(x,y,z);
 	
 	this.mesh.position = this.pVec;
-	
+	this.mesh.castShadow = true; 
 	scene.add (this.mesh);
 
 }
@@ -58,6 +58,32 @@ BoxTest.prototype = {
 				console.log(e.message)
 			}
 			
+		} else {
+			try{ // try block because Player doesn't get loaded until later. 
+				if(SphereAABB_Intersect(Player.pVecWalk, 2, this.vectorMin, this.vectorMax )){
+				
+					var vec = InterDistVect;
+					
+					var vecUnit = InterDistVect.clone().normalize();
+					
+					var vecPrime = vecUnit.clone().multiplyScalar((2 - InterDistVect.length()));
+					//console.log(vecPrime);
+					Player.pVecWalk.addSelf(vecPrime);
+					if(eqlsTol(vecUnit.y, 1 , 0.1)){
+						Player.walkVY = 0;
+						Player.groundContact = true;					
+					} else if(eqlsTol(vecUnit.y, -1 , 0.1)){
+						Player.walkVY = 0;
+					}
+				    this.mesh.material = this.material2;
+				}  else{
+				    this.mesh.material = this.material;
+				}
+				
+				
+			}catch(e){
+				console.log(e.message)
+			}
 		}
 		
 		this.timeAlive += timeElapsed;
