@@ -53,7 +53,7 @@ function onLoad(){
 	
 	// Create a directional light to show off the object
 	light = new THREE.DirectionalLight( 0xffffff, 1.5);
-	light.position.set(0, 200, 200);
+	light.position.set(100, 200, 200);
 	light.castShadow = true;
 	light.shadowDarkness = 0.5;
 	light.shadowCameraRight = 100 ;
@@ -118,12 +118,15 @@ function onLoad(){
 	}
 	
 	spawnElement(new BoxTest(100, 0, 100, 100,50,70), ELEMENT.SCENERY);
-	for( var i = 0; i < 50; i += 2){
-	  	spawnElement(new BoxTest(100, 25 - i/4 - .5, 135 + 4 * i + 4, 10 , 1, 8), ELEMENT.SCENERY);
-	    
-		spawnElement(new BoxTest(112, 25 - i/4 - .5, 135 + 4 * i + 4, 10 , 1, 8), ELEMENT.SCENERY);
-	}
 	
+	var stairWidth = 2;
+	for( var i = 0; i < 100; i += 2){
+	  	spawnElement(new BoxTest(100, 25 - i/4 - .5, 135 + stairWidth/2 * i +stairWidth/2, 10 , 1, stairWidth), ELEMENT.SCENERY);
+	    
+		//spawnElement(new BoxTest(112, 25 - i/4 - .5, 135 + 4 * i + 4, 10 , 1, 8), ELEMENT.SCENERY);
+	}
+
+	FloatingTemple(Math.random() * 1000 - 500, Math.random() * 100 + 100 ,Math.random() * 1000 - 500 )
 	
 	//spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
 	//spawnElement(new BallTest(0.2,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );

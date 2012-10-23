@@ -62,6 +62,7 @@ var Player = {
             this.pVecWalk.x = this.fly_pVec.x;
             this.pVecWalk.z = this.fly_pVec.z;
             this.pVecWalk.y = this.fly_pVec.y;//getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);
+            this.walkVY = 10;
         }
 		
 		
