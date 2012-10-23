@@ -40,6 +40,14 @@ BoxTest.prototype = {
 		if (!Player.isWalking){
 			try{ // try block because Player doesn't get loaded until later. 
 				if(SphereAABB_Intersect(Player.fly_pVec, 5, this.vectorMin, this.vectorMax )){
+				
+					var vec = InterDistVect;
+					
+					var vecUnit = InterDistVect.clone().normalize();
+					
+					var vecPrime = vecUnit.clone().multiplyScalar((5 - InterDistVect.length()));
+					//console.log(vecPrime);
+					Player.fly_pVec.addSelf(vecPrime);
 				    this.mesh.material = this.material2;
 				}  else{
 				    this.mesh.material = this.material;

@@ -117,7 +117,7 @@ function onLoad(){
 		spawnElement(new BallTest(randR, randX, randY , randZ), ELEMENT.PARTICLE );
 	}
 	
-	spawnElement(new BoxTest(100, 100 , 100, 10,5,7), ELEMENT.PARTICLE);
+	spawnElement(new BoxTest(100, 100 , 100, 100,50,70), ELEMENT.PARTICLE);
 	
 	//spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
 	//spawnElement(new BallTest(0.2,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
