@@ -29,7 +29,7 @@ var BallTest = function(radius, x, y, z){
 	
 	this.vVec = new THREE.Vector3(0,0,0);
 	this.aVec = new THREE.Vector3(0,-9.81,0);
-	console.log("Ball Mesh: " + this.mesh.position.y + " pVec" + this.pVec.y)
+	//console.log("Ball Mesh: " + this.mesh.position.y + " pVec" + this.pVec.y)
 	scene.add(this.mesh);
 }
 

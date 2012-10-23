@@ -19,7 +19,7 @@ var Player = {
 		var rotationFix = new THREE.Matrix4();
 		//rotationFix.rotateY(-Math.PI);
 		geometry.applyMatrix(rotationFix);
-		
+			
 		this.mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 		this.mesh.eulerOrder = 'YXZ';
 		this.mesh.scale.x = 3;
@@ -32,6 +32,8 @@ var Player = {
 		
 		this.fly_pVec = new THREE.Vector3(0,getTerrainHeight(terrainMesh, 0, -50) + 10,-50);
 		
+		this.flyRoll = 0;
+			
 		//this.fly_vVec = new THREE.Vector3(10,0,0);
 		this.fly_dir = new THREE.Vector3(0,0,0);
 		this.flySpeed = 40;
@@ -82,24 +84,42 @@ var Player = {
     	//this.fly_pVec.x -= Math.sin(this.fly_dir.y ) * this.flySpeed * timeElapsed * 0.001;
              
 		if ( 65 in keysDown) {	//A
-            
 			this.fly_dir.y += timeElapsed * 0.001 * 1;
-        }
-        if ( 68 in keysDown) {	//D
+			this.flyRoll -= timeElapsed * 0.001 * 0.5;
+        } else if ( 68 in keysDown) {	//D
             
 			this.fly_dir.y -= timeElapsed * 0.001 * 1;
-			
+			this.flyRoll += timeElapsed * 0.001 * 0.5;
+		} else {
+			if(this.flyRoll < 0.1){
+				this.flyRoll += timeElapsed * 0.001 * 0.5;
+				if(this.flyRoll > 0){
+				   this.flyRoll = 0;
+				}
+			} else if(this.flyRoll > 0.1){
+				this.flyRoll -= timeElapsed * 0.001 * 0.5;
+				if(this.flyRoll < 0){
+				   this.flyRoll = 0;
+				}
+			}
 		}
-		if ( 83 in keysDown) {	// S
+		
+		if (this.flyRoll > Math.PI / 4){
+		    this.flyRoll = Math.PI/4;
+		} else if (this.flyRoll < - Math.PI/4){
+		    this.flyRoll = -Math.PI/4;
+		}
+	
+		if ( 87 in keysDown) {	// S
             this.fly_dir.x += timeElapsed * 0.001 * 1;
+            
 			//this.flySpeed = 20;
 			
-		} else 	if ( 87 in keysDown) {	// W
+		} else 	if ( 83 in keysDown) {	// W
             this.fly_dir.x -= timeElapsed * 0.001 * 1;
+            
 			//this.flySpeed = 60;
 			
-		}else {
-		    //this.flySpeed = 40;
 		}
 	    
 		if(this.fly_dir.x > Math.PI / 2){
@@ -109,8 +129,9 @@ var Player = {
 		}
 		
 		
-		this.mesh.rotation = this.fly_dir;
-		
+		this.mesh.rotation.x = this.fly_dir.x;
+		this.mesh.rotation.y = this.fly_dir.y;
+		this.mesh.rotation.z = this.flyRoll;
 		var tH = 0;
         
         try{
