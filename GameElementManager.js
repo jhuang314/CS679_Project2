@@ -16,12 +16,12 @@ var updatingLists = false;
 var tempList = null;
 
 
-allLists[0] = p_bulletList;
+/*allLists[0] = p_bulletList;
 allLists[1] = enemyList;
 allLists[2] = sceneryList; // scenery should be non-moving, 	
 allLists[3] = e_bulletList; 	
 allLists[4] = playerList;	
-allLists[5] = particleList; 	
+allLists[5] = particleList; */	
 
 var collisionMap = null;// new List();
 
@@ -36,6 +36,13 @@ var initGameElementManager = function(){
 	tempList = new List();
 	
 	collisionMap = new List();
+	
+	allLists[0] = p_bulletList;
+	allLists[1] = enemyList;
+	allLists[2] = sceneryList; // scenery should be non-moving, 	
+	allLists[3] = e_bulletList; 	
+	allLists[4] = playerList;	
+	allLists[5] = particleList; 
 	
 	// in collision maps, the first element is treated as non-moving.
 	 
@@ -94,11 +101,12 @@ var updateAllElements = function (timeElapsed){
 	}
 	
 	for(cMap in collisionMap){
-		var list_b = updatingLists[cMap.b];
-		var list_a = updatingLists[cMap.a];
+		var list_b = allLists[cMap.b];
+		var list_a = allLists[cMap.a];
 		// stationary object
 		for(stat_obj in list_a){
 			for(mov_obj in list_b){
+				
 				var responseVec = stat_obj.collideSphere(mov_obj.position, mov_obj.radius);
 				if(responseVec !== null){
 					mov_obj.collisionResponse(responseVec);	

@@ -26,19 +26,20 @@ var BallTest = function(radius, x, y, z){
 	this.pVec = new THREE.Vector3(x,y,z);
 	
 	this.mesh.position = this.pVec;
-	
+	this.position = this.pVec;
 	this.vVec = new THREE.Vector3(0,0,0);
 	this.aVec = new THREE.Vector3(0,-9.81,0);
-	//console.log("Ball Mesh: " + this.mesh.position.y + " pVec" + this.pVec.y)
+	
 	scene.add(this.mesh);
 }
-
-var debug11 = 10;
-var debug12 = 10;
 
 BallTest.prototype = {
 	
 	constructor: BallTest,
+
+	collisionResponse: function(responseVector){
+		// none yet. 
+	},
 
 	onPlayerCollide: function ( ) {
 		return STATE.ALIVE;	

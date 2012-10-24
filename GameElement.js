@@ -21,9 +21,9 @@ GameElement.prototype = {
 
 	// gives a sphere which the object will collide with itself
 	// returns null if no collision, response vector if there is a colision
-	collideSphere(pos,radius){
+	collideSphere: function(pos,radius){
 		return null; // the prototype returns null
-	}
+	},
 
 	onPlayerCollide: function ( ) {
 		return STATE.ALIVE;	
