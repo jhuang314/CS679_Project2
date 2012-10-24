@@ -74,6 +74,11 @@ function onLoad(){
 	lightSphere.position = light2.position;
 	scene.add(lightSphere);	
 	
+	
+	stats = new Stats();
+	stats.setMode( 0 );	// 0: fps, 1: ms
+	document.body.appendChild( stats.domElement );
+	
 	sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
 	sound1.position.copy( lightSphere.position );
 	sound1.play();
@@ -146,10 +151,12 @@ function onLoad(){
 	*/
 	jsonLoader.load( "./meshes/fighter_obj.js", function(geo){Player.load(geo);} );
     
+		
 	updateInput = addInput();
 	startT = Date.now();
 	run();
 }
+
 
 var Sound = function ( sources, radius, volume ) {
 	var audio = document.createElement( 'audio' );
@@ -178,8 +185,10 @@ var Sound = function ( sources, radius, volume ) {
 
 var startT = 0;
 var elapsedT = 10;
-
+var stats;
+	
 function run() {
+	stats.begin();
 	elapsedT = Date.now() - startT;
 	startT = Date.now();
 	
@@ -199,4 +208,5 @@ function run() {
 	renderer.render( scene, mainCamera );
 	
 	reqFrame(run); 
+	stats.end();
 }
