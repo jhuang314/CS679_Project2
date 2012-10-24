@@ -8,7 +8,7 @@ var FloatingTemple = function(x,y,z){
 	var r = 50;
 	var ht = 5;
 	
-	
+	//var map = THREE.ImageUtils.loadTexture('textures/04multia.jpg', new THREE.UVMapping(), function() {renderer.render(scene);})
 	
 	var mtA = new THREE.MeshPhongMaterial({color: 0x444444, ambient: 0x444444, specular: 0x444444, emissive: 0x333333, shininess:0});
 	var mtB = new THREE.MeshPhongMaterial({color: 0x003300, ambient: 0x003300, specular: 0x003333, emissive: 0x002200, shininess:0}); 
