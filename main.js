@@ -17,7 +17,7 @@ function onLoad(){
 	container = document.getElementById("container");
 
 	var jsonLoader = new THREE.JSONLoader();
-        
+    initGameElementManager();     
 
 	// Create the Three.js renderer, add it to our div
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -51,6 +51,9 @@ function onLoad(){
 	terrainMesh.position.z = -500;
 	scene.add (terrainMesh);
 	
+	
+	
+	
 	// Create a directional light to show off the object
 	light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(100, 200, 200);
@@ -82,6 +85,16 @@ function onLoad(){
 	sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
 	sound1.position.copy( lightSphere.position );
 	sound1.play();
+	
+	var map2 = THREE.ImageUtils.loadTexture('textures/04muroch256.png', new THREE.UVMapping(), function() {renderer.render(scene);})
+	cubeMaterial = new THREE.MeshPhongMaterial({map:map2, emissive: 0x333333, shininess:0});
+	var cubeGeometry = new THREE.CubeGeometry(10,40,10);
+	var tempCube = new THREE.Mesh(cubeGeometry,cubeMaterial);	
+	
+	tempCube.position.set(-10,10,-20);
+	scene.add (tempCube); 
+	 
+		
 	 /*
 	cubeGeometry = new THREE.CubeGeometry(0.5,0.5,0.5);
 	cubeMaterial = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});

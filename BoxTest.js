@@ -25,6 +25,16 @@ BoxTest.prototype = {
 	
 	constructor: BoxTest,
 
+	collideSphere: function(pos,radius){
+	    try{
+			if(SphereAABB_Intersect(pos, radius, this.vectorMin, this.vectorMax )){
+				return InterDistVect.clone();    
+			}		
+		}catch (e){}
+		
+		return null; 
+	},
+
 	onPlayerCollide: function ( ) {
 		return STATE.ALIVE;	
 	},
@@ -37,7 +47,7 @@ BoxTest.prototype = {
 	
 		this.counter ++;
 		
-		if (!Player.isWalking){
+		/*if (!Player.isWalking){
 			try{ // try block because Player doesn't get loaded until later. 
 				if(SphereAABB_Intersect(Player.fly_pVec, 5, this.vectorMin, this.vectorMax )){
 				
@@ -84,7 +94,7 @@ BoxTest.prototype = {
 			}catch(e){
 				console.log(e.message)
 			}
-		}
+		}*/
 		
 		this.timeAlive += timeElapsed;
 		

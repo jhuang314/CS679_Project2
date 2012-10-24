@@ -40,6 +40,10 @@ var Player = {
 		
 		this.flyRotMat4 = new THREE.Matrix4();
 		
+		// Collision Stuff
+		this.radius = 5; // flymode radius = 5, walk mode radius = 2
+		this.position = this.fly_pVec;
+		
 		// mesh stuff
 		
 		this.mesh.position = this.fly_pVec;
@@ -47,6 +51,33 @@ var Player = {
 		
 		spawnElement(this, ELEMENT.PLAYER);
 	
+	},
+	
+	collisionResponse: function(responseVector){
+		
+		var vec = responseVector;
+			
+		var vecUnit = vec.clone().normalize();
+			
+		var vecPrime = vecUnit.clone().multiplyScalar((this.radius - vec.length()));
+		
+		if (!Player.isWalking){
+			
+			this.fly_pVec.addSelf(vecPrime);
+		    this.mesh.material = this.material2;
+			
+		} else {
+			
+			this.pVecWalk.addSelf(vecPrime);
+			
+			if(eqlsTol(vecUnit.y, 1 , 0.1)){
+				this.walkVY = 0;
+				this.groundContact = true;					
+			} else if(eqlsTol(vecUnit.y, -1 , 0.1)){
+				this.walkVY = 0;
+			}
+			
+		}
 	},
 	
 	update: function(timeElapsed){
@@ -62,6 +93,10 @@ var Player = {
             this.pVecWalk.x = this.fly_pVec.x;
             this.pVecWalk.z = this.fly_pVec.z;
             this.pVecWalk.y = this.fly_pVec.y;//getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);
+            
+            this.radius = (this.isWalking)? 2:5 ; // flymode radius = 5, walk mode radius = 2
+			this.position = (this.isWalking)? this.pVecWalk : this.fly_pVec ;
+            
             this.walkVY = 10;
         }
 		
