@@ -114,7 +114,7 @@ function onLoad(){
 		
 		var randY = tH + randR + Math.random() * 10 + Math.random() * 10 + 1;
 		
-		spawnElement(new BallTest(randR, randX, randY , randZ), ELEMENT.PARTICLE );
+		spawnElement(new BallTest(randR, randX, randY , randZ), ELEMENT.SCENERY );
 	}
 	
 	spawnElement(new BoxTest(100, 0, 100, 100,50,70), ELEMENT.SCENERY);

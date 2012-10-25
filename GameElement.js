@@ -17,11 +17,11 @@ GameElement.prototype = {
 	
 	constructor: GameElement,
 
-	collisionResponse: function(responseVector, insideObject, objectType){},
+	collisionResponse: function(responseVector, insideObject){},
 
 	// gives a sphere which the object will collide with itself
 	// returns null if no collision, response vector if there is a colision
-	collideSphere: function(pos,radius){
+	collideSphere: function(pos,radius, objectType){
 		return null; // the prototype returns null
 	},
 

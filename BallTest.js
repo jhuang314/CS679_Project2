@@ -12,6 +12,8 @@ var bubbleTextureCube = null;
 
 var bubbleMaterial = null;
 
+var bubbleSound = null;
+
 var BallTest = function(radius, x, y, z){
 	// we'll use conservation of energy to compinsate for sampling errors 
 	// define mass to be 1 kg, energy is in joules
@@ -61,6 +63,8 @@ var BallTest = function(radius, x, y, z){
 
 		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms };
 		bubbleMaterial = new THREE.ShaderMaterial( parameters );
+		bubbleMaterial.opacity = 0.5;
+		bubbleMaterial.transparent = true;
 	}
 	var material = bubbleMaterial;
 	
@@ -76,13 +80,38 @@ var BallTest = function(radius, x, y, z){
 	this.mesh.scale.z = radius;
 	this.vVec = new THREE.Vector3(0,0,0);
 	this.aVec = new THREE.Vector3(0,-9.81,0);
-	
+	this.remove = false;
 	scene.add(this.mesh);
 }
 
 BallTest.prototype = {
 	
 	constructor: BallTest,
+
+	collideSphere: function(pos,radius, objectType){
+	
+		if(objectType === 4){ // player type constant is 4
+			if (!Player.isWalking){
+				try{ // try block because Player doesn't get loaded until later. 
+					if(distanceSqrd(Player.fly_pVec, this.pVec) < Math.pow(this.radius + 5, 2)){
+						//this.mesh.material = this.collisionMaterial;
+						
+						if(bubbleSound === null){
+							sound1 = new Sound( ['sound/qubodup-crash.ogg'], 50, 1 );
+						}
+						
+						sound1.play();
+						this.remove = true;
+					}
+				}catch(e){
+					console.log(e.message)
+				}
+				
+			}			
+		
+		}
+		return null; // the prototype returns null
+	},
 
 	collisionResponse: function(responseVector, insideObject){
 		// none yet. 
@@ -100,18 +129,7 @@ BallTest.prototype = {
 	
 		this.counter ++;
 		
-		if (!Player.isWalking){
-			try{ // try block because Player doesn't get loaded until later. 
-				if(distanceSqrd(Player.fly_pVec, this.pVec) < Math.pow(this.radius + 5, 2)){
-					this.mesh.material = this.collisionMaterial;
-					sound1 = new Sound( ['sound/qubodup-crash.ogg'], 50, 1 );
-					sound1.play();
-				}
-			}catch(e){
-				console.log(e.message)
-			}
-			
-		}
+		
 		
 		
 		this.timeAlive += timeElapsed;
@@ -162,7 +180,12 @@ BallTest.prototype = {
 		}
 		
 		this.mesh.position = this.pVec;
-		
+		if(this.remove){
+			
+			scene.remove(this.mesh);
+			return STATE.DEAD;
+				
+		}
 		return STATE.ALIVE;		
 	}
 
