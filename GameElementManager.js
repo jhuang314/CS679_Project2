@@ -107,7 +107,7 @@ var updateAllElements = function (timeElapsed){
 		for(stat_obj in list_a){
 			for(mov_obj in list_b){
 				
-				var responseVec = stat_obj.collideSphere(mov_obj.position, mov_obj.radius);
+				var responseVec = stat_obj.collideSphere(mov_obj.position, mov_obj.radius, cMap.b);
 				if(responseVec !== null){
 					mov_obj.collisionResponse(responseVec,responseInside);	
 				}

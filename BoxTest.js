@@ -25,7 +25,7 @@ BoxTest.prototype = {
 	
 	constructor: BoxTest,
 
-	collideSphere: function(pos,radius){
+	collideSphere: function(pos,radius, objectType){
 	    try{
 			if(SphereAABB_Intersect(pos, radius, this.vectorMin, this.vectorMax )){
 				return InterDistVect.clone();    

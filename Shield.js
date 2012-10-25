@@ -38,7 +38,7 @@ RedShield.prototype = {
 		return STATE.ALIVE;	
 	},
 	
-	collideSphere: function(pos,radius){
+	collideSphere: function(pos, radius, objectType){
 	    try{ 
 			if(Sphere_Sphere(this.position, this.radius, pos, radius)){
 				return InterDistVect.clone();    
@@ -109,8 +109,9 @@ GreenShield.prototype = {
 		return STATE.ALIVE;	
 	},
 	
-	collideSphere: function(pos,radius){
-	    if(Player.isWalking){
+	collideSphere: function(pos,radius, objectType){
+	   
+	    if(objectType === 4 && Player.isWalking){
 			return null;
 		}
 		
