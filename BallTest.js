@@ -1,7 +1,6 @@
 //
 
 var BallTest = function(radius, x, y, z){
-	
 	// we'll use conservation of energy to compinsate for sampling errors 
 	// define mass to be 1 kg, energy is in joules
 	// since particle is at rest at time t = 0, energy is purely potential
@@ -17,7 +16,15 @@ var BallTest = function(radius, x, y, z){
 	
 	var geometry =  new THREE.SphereGeometry(radius);
 	
-	var material = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
+	var material = new THREE.ShaderMaterial({
+	  uniforms: THREEx.UniformsLib['ball'],
+	  attributes: THREEx.AttributesLib['ball'],
+	  vertexShader: THREEx.ShaderLib['ball'].vertexShader,
+	  fragmentShader: THREEx.ShaderLib['ball'].fragmentShader,
+	  transparent: true
+	});
+	
+	//var material = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
 	
 	this.collisionMaterial =  new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
 	
