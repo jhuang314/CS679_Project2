@@ -53,21 +53,25 @@ var Player = {
 	
 	},
 	
-	collisionResponse: function(responseVector){
+	collisionResponse: function(responseVector, insideObj){
 		
 		var vec = responseVector;
 			
 		var vecUnit = vec.clone().normalize();
-			
-		var vecPrime = vecUnit.clone().multiplyScalar((this.radius - vec.length()));
 		
-		if (!Player.isWalking){
 			
-			this.fly_pVec.addSelf(vecPrime);
-		    this.mesh.material = this.material2;
-			
+		var vecPrime = null;
+		
+		if(insideObj){
+		
+		    vecPrime = vecUnit.clone().multiplyScalar((this.radius + vec.length()));
 		} else {
-			
+		    vecPrime = vecUnit.clone().multiplyScalar((this.radius - vec.length()));
+		} 
+		
+		
+		
+		if (Player.isWalking){
 			this.pVecWalk.addSelf(vecPrime);
 			
 			if(eqlsTol(vecUnit.y, 1 , 0.1)){
@@ -77,7 +81,24 @@ var Player = {
 				this.walkVY = 0;
 			}
 			
+			mainCamera.rotation = this.rotWalk;
+			mainCamera.position = this.pVecWalk;
+		} else {
+			this.fly_pVec.addSelf(vecPrime);
+		    this.mesh.material = this.material2;
+			
+			
+			
+			
+			var cX = Math.sin(this.fly_dir.y) * 30;
+			var cZ = Math.cos(this.fly_dir.y) * 30;
+			mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
+		
+			mainCamera.lookAt(this.fly_pVec);
+			
 		}
+		
+		mainCamera.updateMatrix();
 	},
 	
 	update: function(timeElapsed){

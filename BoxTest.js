@@ -34,6 +34,10 @@ BoxTest.prototype = {
 		
 		return null; 
 	},
+	
+	collisionResponse: function(responseVector, insideObject){
+		// none yet. 
+	},
 
 	onPlayerCollide: function ( ) {
 		return STATE.ALIVE;	

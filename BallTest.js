@@ -37,7 +37,7 @@ BallTest.prototype = {
 	
 	constructor: BallTest,
 
-	collisionResponse: function(responseVector){
+	collisionResponse: function(responseVector, insideObject){
 		// none yet. 
 	},
 

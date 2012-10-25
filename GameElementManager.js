@@ -109,7 +109,7 @@ var updateAllElements = function (timeElapsed){
 				
 				var responseVec = stat_obj.collideSphere(mov_obj.position, mov_obj.radius);
 				if(responseVec !== null){
-					mov_obj.collisionResponse(responseVec);	
+					mov_obj.collisionResponse(responseVec,responseInside);	
 				}
 			}
 		
