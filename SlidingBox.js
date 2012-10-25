@@ -1,6 +1,6 @@
 // 
 
-var SlidingBox = function(x,y,z, w,h,l){
+var SlidingBox = function(x,y,z, w,h,l, walkPush){
 
 	var geometry =  new THREE.CubeGeometry(w, h, l);
 	
@@ -10,6 +10,8 @@ var SlidingBox = function(x,y,z, w,h,l){
 	this.w = w;
 	this.h = h;
 	this.l = l;
+
+	this.walkPush = walkPush;
 	
 	this.material = new THREE.MeshPhongMaterial({color: 0x664488, ambient: 0x000088, specular: 0x008888, emissive: 0x332244, shininess:3});
 	//this.material2 = new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
@@ -31,7 +33,7 @@ SlidingBox.prototype = {
 
 	collideSphere: function(pos, radius, objectType){
 	    
-	    if(objectType === 4 && Player.isWalking){
+	    if(objectType === 4 && Player.isWalking === this.walkPush){
 			try{
 				if(SphereAABB_Intersect(pos, radius, this.vectorMin, this.vectorMax )){
 					var r = InterDistVect.clone();    
