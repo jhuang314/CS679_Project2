@@ -1,10 +1,26 @@
 //
 
+
+var highResSphere = null;
+var bubbleURLS = [
+		'textures/cube/skybox/px.jpg','textures/cube/skybox/nx.jpg',
+		'textures/cube/skybox/py.jpg','textures/grass4.jpg',
+		'textures/cube/skybox/pz.jpg','textures/cube/skybox/nz.jpg'
+		];
+
+var bubbleTextureCube = null;
+
+var bubbleMaterial = null;
+
 var BallTest = function(radius, x, y, z){
 	// we'll use conservation of energy to compinsate for sampling errors 
 	// define mass to be 1 kg, energy is in joules
 	// since particle is at rest at time t = 0, energy is purely potential
 	this.energy = 1 * 9.81 * (y - radius);   
+
+	if(highResSphere === null){
+		highResSphere = new THREE.SphereGeometry(radius,20,20);	
+	}
 
 	// check energy of system every n frames	
 	this.recalcTime = 50;
@@ -14,7 +30,7 @@ var BallTest = function(radius, x, y, z){
 	
 	this.radius = radius;
 
-	var geometry =  new THREE.SphereGeometry(radius,50,50);
+	var geometry = highResSphere;  
 /*		
 	var material = new THREE.ShaderMaterial({
 	  uniforms: THREEx.UniformsLib['ball'],
@@ -36,17 +52,21 @@ var BallTest = function(radius, x, y, z){
 		'textures/cube/skybox/pz.jpg','textures/cube/skybox/nz.jpg'
 		];
 
+	if(bubbleTextureCube === null){
+		bubbleTextureCube = THREE.ImageUtils.loadTextureCube( urls );
+		bubbleTextureCube.format = THREE.RGBFormat;
+		var shader = THREE.ShaderUtils.lib[ "fresnel" ];
+		var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+		uniforms[ "tCube" ].value = bubbleTextureCube;
 
-	var textureCube = THREE.ImageUtils.loadTextureCube( urls );
-	textureCube.format = THREE.RGBFormat;
+		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms };
+		bubbleMaterial = new THREE.ShaderMaterial( parameters );
+	}
+	var material =bubbleMaterial;
 
-	var shader = THREE.ShaderUtils.lib[ "fresnel" ];
-	var uniforms = THREE.UniformsUtils.clone( shader.uniforms );
+	
 
-	uniforms[ "tCube" ].value = textureCube;
-
-	var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms };
-	var material = new THREE.ShaderMaterial( parameters );
+	
 // Modified Part		
 	
 	this.mesh = new THREE.Mesh(geometry, material);
