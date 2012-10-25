@@ -96,7 +96,10 @@ function onLoad(){
 	
 	scene.add (tempCube); 
 	
-	spawnElement(new RedShield (-300, 0, -300, 100), ELEMENT.SCENERY);	
+	spawnElement(new RedShield (-300, 0, -300, 100), ELEMENT.SCENERY);
+	
+	spawnElement(new GreenShield (300, 0, -300, 100), ELEMENT.SCENERY);
+		
 	 /*
 	cubeGeometry = new THREE.CubeGeometry(0.5,0.5,0.5);
 	cubeMaterial = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
