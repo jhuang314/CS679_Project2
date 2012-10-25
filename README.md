@@ -18,3 +18,11 @@ textures/grass1.png
 	License: CC-BY 3.0
 	
 	Created by qubodup
+	
+textures/basalt-tiles.png
+
+	http://opengameart.org/content/basalt-tiles
+	
+	License Public Domain
+	
+	Created by Uruktos

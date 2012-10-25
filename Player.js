@@ -19,7 +19,7 @@ var Player = {
 		var rotationFix = new THREE.Matrix4();
 		//rotationFix.rotateY(-Math.PI);
 		geometry.applyMatrix(rotationFix);
-			
+		geometry.materials[0].ambient = 0xffffff;	
 		this.mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
 		this.mesh.eulerOrder = 'YXZ';
 		this.mesh.scale.x = 3;
