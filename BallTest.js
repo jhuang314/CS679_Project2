@@ -19,7 +19,7 @@ var BallTest = function(radius, x, y, z){
 	this.energy = 1 * 9.81 * (y - radius);   
 
 	if(highResSphere === null){
-		highResSphere = new THREE.SphereGeometry(radius,20,20);	
+		highResSphere = new THREE.SphereGeometry(1,20,20);	
 	}
 
 	// check energy of system every n frames	
@@ -62,10 +62,7 @@ var BallTest = function(radius, x, y, z){
 		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms };
 		bubbleMaterial = new THREE.ShaderMaterial( parameters );
 	}
-	var material =bubbleMaterial;
-
-	
-
+	var material = bubbleMaterial;
 	
 // Modified Part		
 	
@@ -74,6 +71,9 @@ var BallTest = function(radius, x, y, z){
 	this.pVec = new THREE.Vector3(x,y,z);
 	this.mesh.position = this.pVec;
 	this.position = this.pVec;
+	this.mesh.scale.x = radius;
+	this.mesh.scale.y = radius;
+	this.mesh.scale.z = radius;
 	this.vVec = new THREE.Vector3(0,0,0);
 	this.aVec = new THREE.Vector3(0,-9.81,0);
 	
