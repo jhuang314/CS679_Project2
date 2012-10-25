@@ -4,6 +4,41 @@ var responseInside = false;
 
 
 /*
+pos1 - THREE.Vector3
+r1   - float
+pos2 - THREE.Vector3
+r2   - float
+
+The response vector is for sphere 2 
+*/
+function Sphere_Sphere(pos1, r1, pos2, r2){
+	var res = new THREE.Vector3( pos2.x - pos1.x,  pos2.y - pos1.y,  pos2.z - pos1.z);
+	responseInside = false;
+	var dd = res.x * res.x + res.y * res.y + res.z * res.z;
+	var rad2 = (r1 + r2) * (r1 + r2);
+	var rad3 = (r1 - r2) * (r1 - r2) 
+	if(dd < rad2){
+		var res2 = res.clone().normalize();
+		res2.multiplyScalar(r1);
+		
+		if(dd < rad3){
+			responseInside =  true;
+			InterDistVect = res2.subSelf(res);
+			return true;
+		}
+	
+		
+		
+		InterDistVect = res.subSelf(res2);
+		return true;	
+	}
+	
+	return false; 
+
+}
+
+
+/*
 
 Algorithm from Real Time Rendering, 3rd Ed, Page 764
 

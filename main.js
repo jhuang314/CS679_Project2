@@ -40,7 +40,7 @@ function onLoad(){
 	
 	var map = THREE.ImageUtils.loadTexture('textures/grass2.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 	
-	terrainMaterial = new THREE.MeshPhongMaterial({ map: map,  shininess:0 }); //new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) 
+	terrainMaterial = new THREE.MeshPhongMaterial({ map: map, emissive:0x00AA00,  shininess:0 }); //new THREE.MeshPhongMaterial({color: 0x004400, ambient: 0x888888, specular: 0x111111, emissive: 0x003300, shininess:0}) 
 	
 	
 	terrainMesh = new THREE.Mesh( terrainGeometry, terrainMaterial);
@@ -58,6 +58,7 @@ function onLoad(){
 	light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(100, 200, 200);
 	light.castShadow = true;
+	
 	light.shadowDarkness = 0.5;
 	light.shadowCameraRight = 100 ;
 	light.shadowCameraLeft = -100 ;
@@ -92,9 +93,10 @@ function onLoad(){
 	var tempCube = new THREE.Mesh(cubeGeometry,cubeMaterial);	
 	
 	tempCube.position.set(-10,10,-20);
+	
 	scene.add (tempCube); 
-	 
-		
+	
+	spawnElement(new RedShield (-300, 0, -300, 100), ELEMENT.SCENERY);	
 	 /*
 	cubeGeometry = new THREE.CubeGeometry(0.5,0.5,0.5);
 	cubeMaterial = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
