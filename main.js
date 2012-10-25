@@ -127,8 +127,30 @@ function onLoad(){
 	}
 
 	FloatingTemple(Math.random() * 1000 - 500, Math.random() * 100 + 100 ,Math.random() * 1000 - 500 )
+
+	var skyCube	= THREE.ImageUtils.loadTextureCube([
+				'textures/cube/skybox/px.jpg','textures/cube/skybox/nx.jpg',
+				'textures/cube/skybox/py.jpg','textures/cube/skybox/ny.jpg',
+				'textures/cube/skybox/pz.jpg','textures/cube/skybox/nz.jpg'
+			]);
 	
-	//spawnElement(new BallTest(0.7,25,getTerrainHeight(terrainMesh, 50,50) + 6,50), ELEMENT.PARTICLE );
+
+	var shader = THREE.ShaderUtils.lib["cube"];
+	shader.uniforms["tCube"].value = skyCube;
+	
+	var skyMaterial = new THREE.ShaderMaterial({
+			fragmentShader	: shader.fragmentShader,
+				vertexShader	: shader.vertexShader,
+				uniforms	: shader.uniforms,
+				depthWrite	: false,
+				side		: THREE.BackSide
+		});
+
+	var skyGeometry	= new THREE.CubeGeometry( 1000, 1000, 1000 );
+		var skyMesh	= new THREE.Mesh(skyGeometry, skyMaterial );
+	scene.add(skyMesh);
+
+
 	//spawnElement(new BallTest(0.2,50,getTerrainHeight(terrainMesh, 50,50) + 7,25), ELEMENT.PARTICLE );
 //	spawnElement(new BallTest(1.5,75,getTerrainHeight(terrainMesh, 50,50) + 3,50), ELEMENT.PARTICLE );
 //	spawnElement(new BallTest(1.0,50,getTerrainHeight(terrainMesh, 50,50) + 8,75), ELEMENT.PARTICLE );
