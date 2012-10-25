@@ -63,8 +63,7 @@ var BallTest = function(radius, x, y, z){
 
 		var parameters = { fragmentShader: shader.fragmentShader, vertexShader: shader.vertexShader, uniforms: uniforms };
 		bubbleMaterial = new THREE.ShaderMaterial( parameters );
-		bubbleMaterial.opacity = 0.5;
-		bubbleMaterial.transparent = true;
+		
 	}
 	var material = bubbleMaterial;
 	
