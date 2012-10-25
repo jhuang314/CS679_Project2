@@ -9,7 +9,7 @@ var cycle_s = 0;
 	THREEx.UniformsLib['ball']	= {
 		delta: {type: 'f', value: 0.0},
 		scale: {type: 'f', value: 1.0},
-		alpha: {type: 'f', value: 1.0}
+		alpha: {type: 'f', value: 0.5}
 	};
 	
 	THREEx.ShaderLib['ball']	= {
@@ -30,12 +30,13 @@ var cycle_s = 0;
 		"#endif",
 		
 		"varying vec3 vNormal;",
+		"uniform float alpha;",
 		
 		"void main(void) {\n",			
 			 "vec3 light = vec3(100, 200, 200);",
 			 "light = normalize(light);",
 			 "float dProd = max(0.0, dot(vNormal, light));",
-			 "gl_FragColor = vec4(dProd, dProd, dProd, 1.0);",
+			 "gl_FragColor = vec4(dProd, dProd, dProd, alpha);",
 		"}"
 		].join( "\n" )
 	};
