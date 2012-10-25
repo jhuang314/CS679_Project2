@@ -14,7 +14,7 @@ var BallTest = function(radius, x, y, z){
 	
 	this.radius = radius;
 
-	var geometry =  new THREE.SphereGeometry(radius);
+	var geometry =  new THREE.SphereGeometry(radius,50,50);
 /*		
 	var material = new THREE.ShaderMaterial({
 	  uniforms: THREEx.UniformsLib['ball'],
@@ -31,9 +31,9 @@ var BallTest = function(radius, x, y, z){
 	
 // Modified Part	
 	var urls = [
-			'textures/04muroch256.png', 'textures/04muroch256.png',
-			'textures/04muroch256.png', 'textures/04muroch256.png',
-			'textures/04muroch256.png', 'textures/04muroch256.png'
+		'textures/cube/skybox/px.jpg','textures/cube/skybox/nx.jpg',
+		'textures/cube/skybox/py.jpg','textures/grass4.jpg',
+		'textures/cube/skybox/pz.jpg','textures/cube/skybox/nz.jpg'
 		];
 
 
@@ -84,7 +84,8 @@ BallTest.prototype = {
 			try{ // try block because Player doesn't get loaded until later. 
 				if(distanceSqrd(Player.fly_pVec, this.pVec) < Math.pow(this.radius + 5, 2)){
 					this.mesh.material = this.collisionMaterial;
-					
+					sound1 = new Sound( ['sound/qubodup-crash.ogg'], 50, 1 );
+					sound1.play();
 				}
 			}catch(e){
 				console.log(e.message)
