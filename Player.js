@@ -196,8 +196,8 @@ var Player = {
 			
 		} catch (e){}// in case we are off the mesh
 		
-		if(this.fly_pVec.y - 2 < tH){
-			this.fly_pVec.y = tH + 2;
+		if(this.fly_pVec.y - 4.5 < tH){
+			this.fly_pVec.y = tH + 4.5;
 			
 		}
 		
