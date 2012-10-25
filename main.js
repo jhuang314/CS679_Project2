@@ -182,7 +182,9 @@ function run() {
 	stats.begin();
 	elapsedT = Date.now() - startT;
 	startT = Date.now();
-	
+	cycle_s = cycle_s + 0.003;
+	if (cycle_s > 1)
+		cycle_s -= 1;
 	
 	/* We have to slow down the Physics or we get results that are
 	too far outside acceptable bounds. Admitedly we could be doing 
