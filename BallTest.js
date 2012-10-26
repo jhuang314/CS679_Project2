@@ -98,7 +98,8 @@ BallTest.prototype = {
 					if(bubbleSound === null){
 						bubbleSound = new Sound( ['sound/cork.ogg'], 50, 1 );
 					}
-					popCount++;
+					popCount++; // this line is run once,
+					score += 50; // can't figure out why, but this line is run twice 
 					bubbleSound.play();
 					this.remove = true;
 				}
