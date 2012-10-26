@@ -37,6 +37,14 @@ var keysDown = {}; //holds all keys currently pressed
 // function called per loop to update the input
 var updateInput = null;
 
+var GAMESTATE = {
+	MENU : 0,
+	PLAYING : 1,
+	END :2
+};
+
+var gState = 0;
+	
 var STATE = {
 	DEAD: 0,
 	ALIVE: 1
@@ -86,3 +94,4 @@ function eqlsTol(a, b , tol){
 
 var light = null;
 var clock = 0;
+var bgElement = null;	// background music

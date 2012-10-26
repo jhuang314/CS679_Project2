@@ -19,7 +19,6 @@ function onLoad(){
 	canvas = document.getElementById("myCanvas");
 	ctx = canvas.getContext('2d');
 	
-		
 	var jsonLoader = new THREE.JSONLoader();
     initGameElementManager();     
 
@@ -55,9 +54,7 @@ function onLoad(){
 	terrainMesh.position.z = -500;
 	scene.add (terrainMesh);
 	
-	
-	
-	
+
 	// Create a directional light to show off the object
 	light = new THREE.DirectionalLight( 0xffffff, 1.5);
 	light.position.set(100, 200, 200);
@@ -175,6 +172,7 @@ function onLoad(){
 		
 	updateInput = addInput();
 	//startT = Date.now();
+	
 	clock = new THREE.Clock();
 	run();
 }
@@ -212,7 +210,7 @@ var stats;
 function run() {
 	elapsedT = Date.now() - startT;
 	startT = Date.now();
-
+	stats.begin();
 	
 	/* We have to slow down the Physics or we get results that are
 	too far outside acceptable bounds. Admitedly we could be doing 
@@ -221,15 +219,17 @@ function run() {
 	if(elapsedT > 50){
 		elapsedT == 50;
 	}
-	
-	stats.begin();
-	drawStatusBar();
+	if (gState == GAMESTATE.MENU){
+		drawMainMenu();
+	}
+	else {
+		drawStatusBar();
+	}
 	//sound1.update(mainCamera);
-	
 	updateAllElements(elapsedT);
 	updateInput();
 	renderer.render( scene, mainCamera );
-	
+
+	stats.end();	
 	reqFrame(run); 
-	stats.end();
 }

@@ -1,4 +1,5 @@
 var popCount = 0;
+
 function drawStatusBar() {
 	ctx.clearRect(0, canvas.height-50, canvas.width, canvas.height);
 	ctx.fillStyle = "white";
@@ -11,4 +12,28 @@ function drawStatusBar() {
 	ctx.fillText("Bubble : " + popCount/2, 5, canvas.height-15);
 	ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10, 150, canvas.height-15);
 	
+	bgElement = document.getElementById('bgSound').play();
+//	if(Math.round(clock.getElapsedTime()*10)/10 > 5){
+//		mediaElement.play();
+//	}
+}
+
+
+function drawMainMenu() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "black";
+	ctx.globalAlpha = 0.8;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "red";
+	ctx.font = "bold 50px Verdana";	
+	ctx.fillText("Flight Simulator", (canvas.width/2) - 230, canvas.height/2);
+	ctx.fillStyle = "yellow";
+	ctx.font = "bold 30px Verdana";	
+	ctx.fillText("Press Enter to Start", (canvas.width/2) - 180, canvas.height/2 + 50);
+	
+	if ( 13 in keysDown){
+		gState = GAMESTATE.PLAYING;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		Player.flySpeed = 40;
+	}
 }

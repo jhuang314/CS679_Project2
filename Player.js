@@ -36,7 +36,7 @@ var Player = {
 			
 		//this.fly_vVec = new THREE.Vector3(10,0,0);
 		this.fly_dir = new THREE.Vector3(0,0,0);
-		this.flySpeed = 40;
+		this.flySpeed = 0;
 		
 		this.flyRotMat4 = new THREE.Matrix4();
 		
