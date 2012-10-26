@@ -91,11 +91,11 @@ function onLoad(){
 	var map2 = THREE.ImageUtils.loadTexture('textures/04muroch256.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 	cubeMaterial = new THREE.MeshPhongMaterial({map:map2, emissive: 0x333333, shininess:0});
 	var cubeGeometry = new THREE.CubeGeometry(10,40,10);
-	var tempCube = new THREE.Mesh(cubeGeometry,cubeMaterial);	
+//	var tempCube = new THREE.Mesh(cubeGeometry,cubeMaterial);	
 	
-	tempCube.position.set(-10,10,-20);
+//	tempCube.position.set(-10,10,-20);
 	
-	scene.add (tempCube); 
+//	scene.add (tempCube); 
 	
 	spawnElement(new RedShield (-300, 0, -300, 100), ELEMENT.SCENERY);
 	

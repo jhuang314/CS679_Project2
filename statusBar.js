@@ -33,10 +33,9 @@ function drawStatusBar() {
 		score = Math.round(popCount/2 * 300 * 10) / 10;
 		ctx.fillText("Score : " + score, canvas.width/2 - 80, canvas.height-15);
 		ctx.fillStyle = "yellow";
-		ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10, canvas.width - 140, canvas.height-15);
+		ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10 + " sec", canvas.width - 160, canvas.height-15);
 		
-		
-		
+
 		if(ActionSet){
 			ctx.fillStyle = "#00EE00";
 			ctx.strokeStyle = "black"                                                                          
@@ -59,7 +58,7 @@ function drawStatusBar() {
 		
 	}
 	
-	if	(Math.round(clock.getElapsedTime()*10)/10 > 3000)
+	if	(Math.round(clock.getElapsedTime()*10)/10 >= 3000)
 		gState = GAMESTATE.END;
 }
 
@@ -100,7 +99,9 @@ function drawEnding() {
 	ctx.fillStyle = "#57E964";
 	t = "Score : " + score;
 	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height-15);
-	
+	ctx.fillStyle = "yellow";
+	ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10 + " sec", canvas.width - 160, canvas.height-15);
+		
 	Player.flySpeed = 0;
 	clock.stop(); 
 	bgElement.pause();
