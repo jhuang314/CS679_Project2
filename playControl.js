@@ -1,5 +1,5 @@
 function playControl() {
-	if ( 80 in keysDown && keysDown[80]){
+	if ( 80 in keysDown && keysDown[80]){	// P
 		if (gState == GAMESTATE.PLAYING){
 			gState = GAMESTATE.PAUSED;
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -26,16 +26,17 @@ function playControl() {
 		}
 	}
 	
-	if ( 13 in keysDown && keysDown[13]){
+	if ( 13 in keysDown && keysDown[13] && gState == GAMESTATE.MENU){ // Enter
 		if (gState == GAMESTATE.MENU){
 			gState = GAMESTATE.PLAYING;
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			Player.flySpeed = 40;
+			bgElement.currentTime = 30;
 			bgElement.play();
 		}
 	}
 	
-	if ( 67 in keysDown && keysDown[67] && gState == GAMESTATE.PLAYING){
+	if ( 67 in keysDown && keysDown[67] && gState == GAMESTATE.PLAYING){	// C
 		if (!Player.isWalking){
 			if ( cMode == 1) 
 				cMode = 0;
