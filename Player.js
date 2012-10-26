@@ -287,6 +287,12 @@ var Player = {
 			this.walkVY = 10;				
 		}
         
+        if(84 in keysDown && keysDown[84] && gState == GAMESTATE.PLAYING){
+			this.pVecWalk.x = this.fly_pVec.x;
+        	this.pVecWalk.z = this.fly_pVec.z;
+        	this.pVecWalk.y = this.fly_pVec.y;//getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);				
+		}
+        
         this.walkVY += -9.81 * timeElapsed * 0.001;
         
         this.pVecWalk.y += this.walkVY * timeElapsed * 0.001;
