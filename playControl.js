@@ -11,7 +11,7 @@ function playControl() {
 			ctx.fillText("Game Paused", (canvas.width/2) - 205, 60);
 			ctx.fillStyle = "yellow";
 			ctx.font = "bold 30px Verdana";	
-			ctx.drawImage(imageObj, (canvas.width/2) - 210, 70);
+			ctx.drawImage(imageObj, canvas.width/2 -(Math.round(imageObj.width/2)), 70);
 			ctx.fillText("Press P to continue", (canvas.width/2) - 180, canvas.height - 10);
 			Player.flySpeed = 0;
 			clock.stop(); 
