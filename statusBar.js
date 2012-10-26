@@ -72,13 +72,13 @@ function drawMainMenu() {
 	ctx.globalAlpha = 0.8;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "red";
-	ctx.font = "bold 50px Verdana";	
-	t = "Flight Simulator";
+	ctx.font = "bold 60px Verdana";	
+	t = "Bubble Menace";
 	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2);
 	ctx.fillStyle = "blue";
 	ctx.font = "bold 30px Verdana";	
 	t = "Press Enter to Start";
-	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 + 50);
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 + 70);
 }
 
 function drawEnding() {
