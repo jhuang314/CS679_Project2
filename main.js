@@ -16,6 +16,9 @@ function onLoad(){
 	
 	// container is in globals.js
 	container = document.getElementById("container");
+	canvas = document.getElementById("myCanvas");
+	ctx = canvas.getContext('2d');
+	
 		
 	var jsonLoader = new THREE.JSONLoader();
     initGameElementManager();     
@@ -84,9 +87,9 @@ function onLoad(){
 	stats.setMode( 0 );	// 0: fps, 1: ms
 	document.body.appendChild( stats.domElement );
 	
-	sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
-	sound1.position.copy( lightSphere.position );
-	sound1.play();
+	//sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
+	//sound1.position.copy( lightSphere.position );
+	//sound1.play();
 	
 	var map2 = THREE.ImageUtils.loadTexture('textures/04muroch256.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 	cubeMaterial = new THREE.MeshPhongMaterial({map:map2, emissive: 0x333333, shininess:0});
@@ -171,7 +174,8 @@ function onLoad(){
     
 		
 	updateInput = addInput();
-	startT = Date.now();
+	//startT = Date.now();
+	clock = new THREE.Clock();
 	run();
 }
 
@@ -206,7 +210,6 @@ var elapsedT = 10;
 var stats;
 	
 function run() {
-	stats.begin();
 	elapsedT = Date.now() - startT;
 	startT = Date.now();
 
@@ -219,22 +222,9 @@ function run() {
 		elapsedT == 50;
 	}
 	
-	if(canvas === null){
-		canvas = document.getElementById("myCanvas");
-		ctx = canvas.getContext('2d');
-	}
-	
-	ctx.clearRect(0, canvas.height-20, canvas.width, canvas.height);
-	ctx.fillStyle = "white";
-	ctx.globalAlpha = 0.1;
-	ctx.fillRect(0, canvas.height-20, canvas.width, canvas.height);
-	ctx.globalAlpha = 1;
-	ctx.strokeStyle = "#000000";
-	ctx.font = "6px Verdana";	
-	ctx.textBaseline = 'bottom';	
-	ctx.strokeText("Test: " + startT, 5, canvas.height-6);
-	
-	sound1.update(mainCamera);
+	stats.begin();
+	drawStatusBar();
+	//sound1.update(mainCamera);
 	
 	updateAllElements(elapsedT);
 	updateInput();
