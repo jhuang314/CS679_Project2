@@ -1,6 +1,6 @@
 var popCount = 0;
 
-var StatusBarTip = "Test Tip -- - - - - - - -- -";
+var StatusBarTip = "Pop all the Bubbles!";
 var tipTimeLeft = 2000;
 
 
