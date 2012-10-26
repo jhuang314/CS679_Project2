@@ -1,5 +1,5 @@
 // 
-
+ShowBoxTip = true;
 var SlidingBox = function(x,y,z, w,h,l, walkPush){
 
 	var geometry =  new THREE.CubeGeometry(w, h, l);
@@ -58,6 +58,10 @@ SlidingBox.prototype = {
 		}else{
 			try{
 				if(SphereAABB_Intersect(pos, radius, this.vectorMin, this.vectorMax )){
+					if(objectType === 4 && ShowBoxTip){
+						SetStatusTip("You aren't strong enough to push this box.", 1500)
+						ShowBoxTip = false;
+					}
 					return InterDistVect.clone();    
 				}		
 			}catch (e){}
