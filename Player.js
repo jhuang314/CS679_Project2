@@ -177,14 +177,21 @@ var Player = {
 	
 		if ( 87 in keysDown && gState == GAMESTATE.PLAYING) {	// S
             this.fly_dir.x += timeElapsed * 0.001 * 1;
-            
-			//this.flySpeed = 20;
-			
+
 		} else 	if ( 83 in keysDown && gState == GAMESTATE.PLAYING) {	// W
             this.fly_dir.x -= timeElapsed * 0.001 * 1;
-            
-			//this.flySpeed = 60;
-			
+		}
+		
+		if ( 73 in keysDown && gState == GAMESTATE.PLAYING) {	// I     
+			this.flySpeed += 1;
+		} else 	if ( 75 in keysDown && gState == GAMESTATE.PLAYING) {	// K
+			this.flySpeed -= 1;
+		}
+		
+		if(this.flySpeed > 90 && gState == GAMESTATE.PLAYING){
+			this.flySpeed = 90;		                    
+		} else if (this.flySpeed < 10 && gState == GAMESTATE.PLAYING){
+			this.flySpeed = 10;
 		}
 	    
 		if(this.fly_dir.x > Math.PI / 2){

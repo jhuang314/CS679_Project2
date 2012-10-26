@@ -33,8 +33,11 @@ function drawStatusBar() {
 		//score = Math.round(popCount/2 * 300 * 10) / 10;
 		ctx.fillText("Score : " + score, canvas.width/2 - 80, canvas.height-15);
 		ctx.fillStyle = "yellow";
-		ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10 + " sec", canvas.width - 160, canvas.height-15);
-		
+		ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10 + " sec", canvas.width - 170, canvas.height-15);
+		if (!Player.isWalking){
+			ctx.fillStyle = "Red";
+			ctx.fillText("Speed : " + Player.flySpeed + " MPH", canvas.width - 350, canvas.height-15);
+		}
 
 		if(ActionSet){
 			ctx.fillStyle = "#00EE00";
