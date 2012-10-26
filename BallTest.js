@@ -96,7 +96,7 @@ BallTest.prototype = {
 						//this.mesh.material = this.collisionMaterial;
 						
 						if(bubbleSound === null){
-							bubbleSound = new Sound( ['sound/qubodup-crash.ogg'], 50, 1 );
+							bubbleSound = new Sound( ['sound/cork.ogg'], 50, 1 );
 						}
 						popCount++;
 						bubbleSound.play();
