@@ -32,5 +32,14 @@ function playControl() {
 			bgElement.play();
 		}
 	}
+	
+	if ( 67 in keysDown){
+		if (!Player.isWalking){
+			if ( cMode == 1) 
+				cMode = 0;
+			else if (cMode == 0)
+				cMode = 1;
+		}
+	}
 
 }

@@ -1,7 +1,6 @@
 // JavaScript Document
 // MAIN
-var canvas = null;
-var ctx = null;
+
 function onLoad(){
 
 	// get the animation frame
@@ -85,10 +84,6 @@ function onLoad(){
 	document.body.appendChild( stats.domElement );
 	
 	bgElement = document.getElementById('bgSound');
-	
-	//sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
-	//sound1.position.copy( lightSphere.position );
-	//sound1.play();
 	
 	var map2 = THREE.ImageUtils.loadTexture('textures/04muroch256.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 	cubeMaterial = new THREE.MeshPhongMaterial({map:map2, emissive: 0x333333, shininess:0});
@@ -228,7 +223,7 @@ function run() {
 	else {
 		drawStatusBar();
 	}
-	//sound1.update(mainCamera);
+
 	updateAllElements(elapsedT);
 	updateInput();
 	renderer.render( scene, mainCamera );

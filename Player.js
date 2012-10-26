@@ -92,8 +92,11 @@ var Player = {
 			
 			var cX = Math.sin(this.fly_dir.y) * 30;
 			var cZ = Math.cos(this.fly_dir.y) * 30;
-			mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
-		
+			
+			if (cMode == 0)
+				mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
+			else 
+				mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 100, this.fly_pVec.z - cZ);
 			mainCamera.lookAt(this.fly_pVec);
 			
 		}
@@ -206,7 +209,12 @@ var Player = {
 		var cX = Math.sin(this.fly_dir.y) * 30;
 		var cZ = Math.cos(this.fly_dir.y) * 30;
 		
-		mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
+		
+		if (cMode == 0)
+				mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
+			else 
+				mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 100, this.fly_pVec.z - cZ);
+		//mainCamera.position.set(this.fly_pVec.x - cX, this.fly_pVec.y + 10, this.fly_pVec.z - cZ);
 		
 		mainCamera.lookAt(this.fly_pVec); 	
 	},

@@ -53,13 +53,10 @@ function addInput(){
 
 
     window.addEventListener("keydown", function (e) {
-        
         //console.log(e.keyCode);
         if(!( e.keyCode in keysDown)){
 			keysDown[e.keyCode] = true;
 		}
-        
-
     }, false);
     
     window.addEventListener("keyup", function (e) { delete keysDown[e.keyCode]; }, false);
@@ -67,13 +64,10 @@ function addInput(){
     
     // called once per frame
     function update(){
-    	
     	for(keyKey in keysDown){
 			keysDown[keyKey] = false;
 		}
-		
 	}
-    
     
     return update;
 }

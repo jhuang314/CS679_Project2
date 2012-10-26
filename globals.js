@@ -96,3 +96,6 @@ function eqlsTol(a, b , tol){
 var light = null;
 var clock = 0;
 var bgElement = null;	// background music
+var canvas = null;		// canvas
+var ctx = null;			// context
+var cMode = 0;			// cameraMode 0: back 1: Top
