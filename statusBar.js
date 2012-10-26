@@ -30,7 +30,7 @@ function drawStatusBar() {
 		ctx.textBaseline = 'bottom';	
 		ctx.fillText("Bubble : " + popCount/2, 10, canvas.height-15);
 		ctx.fillStyle = "#57E964";
-		score = Math.round(popCount/2 * 300 * 10) / 10;
+		//score = Math.round(popCount/2 * 300 * 10) / 10;
 		ctx.fillText("Score : " + score, canvas.width/2 - 80, canvas.height-15);
 		ctx.fillStyle = "yellow";
 		ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10 + " sec", canvas.width - 160, canvas.height-15);
