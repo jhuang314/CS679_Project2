@@ -57,7 +57,7 @@ function onLoad(){
 
 	// Create a directional light to show off the object
 	light = new THREE.DirectionalLight( 0xffffff, 1.5);
-	light.position.set(100, 200, 200);
+	light.position.set(-200, 200, 200);
 	light.castShadow = true;
 	
 	light.shadowDarkness = 0.5;
@@ -73,7 +73,7 @@ function onLoad(){
 	light2.position.set(50, getTerrainHeight(terrainMesh, 50,50) + 10, 50); 
 	scene.add( light2 );
 
-	scene.fog =	new THREE.Fog( 0x00AAFF, 100, 1000 )
+	scene.fog =	new THREE.Fog( 0xFFFFD0, 100, 1000 )
 	
 	lightSphere = new THREE.Mesh( new THREE.SphereGeometry( 1 ), new THREE.MeshPhongMaterial({color: 0xff0000, ambient: 0xff0000, specular: 0xff0000, emissive: 0xff0000, shininess:0}));
 	lightSphere.position = light2.position;
@@ -147,7 +147,7 @@ function onLoad(){
 				side		: THREE.BackSide
 		});
 
-	var skyGeometry	= new THREE.CubeGeometry( 1000, 1000, 1000 );
+	var skyGeometry	= new THREE.CubeGeometry( 8000, 8000, 8000 );
 		var skyMesh	= new THREE.Mesh(skyGeometry, skyMaterial );
 	scene.add(skyMesh);
 
