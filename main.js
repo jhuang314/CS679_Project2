@@ -97,7 +97,9 @@ function onLoad(){
 	
 //	scene.add (tempCube); 
 	
-	spawnElement(new RedShield (-300, 0, -300, 100), ELEMENT.SCENERY);
+	var RedShield1 = new RedShield (-300, 0, -300, 100);
+	
+	spawnElement(RedShield1, ELEMENT.SCENERY);
 	
 	spawnElement(new GreenShield (300, 0, -300, 100), ELEMENT.SCENERY);
 	spawnElement(new SlidingBox(100, 25 + 2.5, 100, 10,5,10, false), ELEMENT.SCENERY)	
@@ -123,6 +125,14 @@ function onLoad(){
 	}
 	
 	spawnElement(new BoxTest(100, 0, 100, 100,50,70), ELEMENT.SCENERY);
+	
+	spawnElement(new SwitchObj(100, 27, 100, function(state){
+		if(state){
+			RedShield1.activate();
+		} else {
+		    RedShield1.deactivate();
+		}
+	}), ELEMENT.SCENERY);
 	
 	var stairWidth = 2;
 	for( var i = 0; i < 100; i += 2){

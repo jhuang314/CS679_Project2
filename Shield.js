@@ -23,6 +23,7 @@ var RedShield = function(x,y,z, radius){
 	this.mesh.position = this.pVec;
 	this.position = this.pVec;
 	
+	this.active = true;
 	
 	scene.add(this.mesh);
 
@@ -40,8 +41,22 @@ RedShield.prototype = {
 		return STATE.ALIVE;	
 	},
 	
+	deactivate: function(){
+		scene.remove(this.mesh);
+	    this.active = false;
+	},
+	
+	activate: function(){
+		scene.add(this.mesh);
+		this.active = true;
+	
+	},
+	
 	collideSphere: function(pos, radius, objectType){
-	    try{ 
+	    if(!this.active){
+		    return null;
+		}
+		try{ 
 			if(Sphere_Sphere(this.position, this.radius, pos, radius)){
 				if(objectType === 4 && ShowRedTip){
 					
@@ -76,6 +91,8 @@ RedShield.prototype = {
 		this.timeAlive += timeElapsed;
 		
 		
+			
+	
 		return STATE.ALIVE;		
 	}
 
