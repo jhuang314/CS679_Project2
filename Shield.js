@@ -1,5 +1,7 @@
 // shield 
 
+var ShowRedTip = true;
+var ShowGreenTip = true;
 var RedShield = function(x,y,z, radius){
 	
 	this.radius = radius;
@@ -41,6 +43,14 @@ RedShield.prototype = {
 	collideSphere: function(pos, radius, objectType){
 	    try{ 
 			if(Sphere_Sphere(this.position, this.radius, pos, radius)){
+				if(objectType === 4 && ShowRedTip){
+					
+					SetStatusTip("You can't fly through a Red Shield. You'll have to turn it off somehow.", 1500)
+					ShowRedTip = false;
+					
+					
+									
+				}
 				return InterDistVect.clone();    
 			}		
 		}catch (e){}
@@ -117,6 +127,14 @@ GreenShield.prototype = {
 		
 		try{ 
 			if(Sphere_Sphere(this.position, this.radius, pos, radius)){
+				if(objectType === 4 && ShowGreenTip){
+					
+					SetStatusTip("You can't fly through a Green Shield. Try walking!", 1500)
+					ShowRedTip = false;
+					
+					
+									
+				}
 				return InterDistVect.clone();    
 			}		
 		}catch (e){}
