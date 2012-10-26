@@ -85,3 +85,4 @@ function eqlsTol(a, b , tol){
 }
 
 var light = null;
+var clock = 0;

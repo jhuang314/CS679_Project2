@@ -98,7 +98,7 @@ BallTest.prototype = {
 						if(bubbleSound === null){
 							bubbleSound = new Sound( ['sound/qubodup-crash.ogg'], 50, 1 );
 						}
-						
+						popCount++;
 						bubbleSound.play();
 						this.remove = true;
 					}
