@@ -1,5 +1,5 @@
 function playControl() {
-	if ( 80 in keysDown){
+	if ( 80 in keysDown && keysDown[80]){
 		if (gState == GAMESTATE.PLAYING){
 			gState = GAMESTATE.PAUSED;
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -26,7 +26,7 @@ function playControl() {
 		}
 	}
 	
-	if ( 13 in keysDown){
+	if ( 13 in keysDown && keysDown[13]){
 		if (gState == GAMESTATE.MENU){
 			gState = GAMESTATE.PLAYING;
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -35,7 +35,7 @@ function playControl() {
 		}
 	}
 	
-	if ( 67 in keysDown){
+	if ( 67 in keysDown && keysDown[67]){
 		if (!Player.isWalking){
 			if ( cMode == 1) 
 				cMode = 0;

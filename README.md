@@ -26,3 +26,21 @@ textures/basalt-tiles.png
 	License Public Domain
 	
 	Created by Uruktos
+
+cork sound:	
+
+	Blender Foundation
+	
+	License CC-BY 3.0
+
+	http://opengameart.org/content/cork
+	
+BG Music "Approaching The Sun"
+
+	Reasoner 
+	
+	License CC-BY-NC-SA	3.0
+	
+	http://www.newgrounds.com/audio/listen/122295
+	
+	
