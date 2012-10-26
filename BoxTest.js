@@ -1,4 +1,5 @@
 
+var boxMaterial = null;
 
 var BoxTest = function(x,y,z, w,h,l){
 
@@ -10,7 +11,14 @@ var BoxTest = function(x,y,z, w,h,l){
 	this.material = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
 	this.material2 = new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
 
-	this.mesh = new THREE.Mesh(geometry, this.material);
+	if(boxMaterial === null){
+		var boxMap =  THREE.ImageUtils.loadTexture('textures/basalt-tiles.png', new THREE.UVMapping(), function() {renderer.render(scene);})
+		boxMaterial = new THREE.MeshPhongMaterial({map:boxMap, emissive: 0x333333, shininess:0});
+		
+			
+	}
+	
+	this.mesh = new THREE.Mesh(geometry, boxMaterial);
 	
 	
 	this.pVec = new THREE.Vector3(x,y,z);
