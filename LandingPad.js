@@ -8,7 +8,7 @@ var LandingPad = function(x,y,z){
 	if(LandingPadMap === null){
 		LandingPadMap =  THREE.ImageUtils.loadTexture('textures/LandingPad.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 		LandingPadMaterial = new THREE.MeshPhongMaterial({map:LandingPadMap, emissive: 0x333333, shininess:0});
-		LandingPadGeometry = new THREE.CubeGeometry(30, 10, 30);
+		LandingPadGeometry = new THREE.CubeGeometry(30, 5, 30);
 	}
 	this.pVec = new THREE.Vector3(x,y,z);
 	
@@ -21,6 +21,9 @@ var LandingPad = function(x,y,z){
 	this.mesh = new THREE.Mesh(LandingPadGeometry, LandingPadMaterial);
 	this.mesh.position = this.pVec;
 	scene.add(this.mesh);
+	
+	this.hasShip = false;
+	this.dontAsk = false;
 }
 
 LandingPad.prototype = {
@@ -34,7 +37,33 @@ LandingPad.prototype = {
 		if(objectType === 4){
 			try{
 				if(SphereAABB_Intersect(pos, radius, this.landMin, this.landMax )){
-					setStatusAction("Press 'f' to Land.");					   
+					
+					
+					
+					if(Player.isWalking && this.hasShip){
+						setStatusAction("Press 'F' to Fly.");
+						if( 70 in keysDown && keysDown[70] && gState == GAMESTATE.PLAYING && !this.dontAsk){ // F
+					    	Player.toggleFlyWalk();	
+					    	this.hasShip = false;
+					    	this.dontAsk = true;
+						} else {
+						    this.dontAsk = false;
+						}
+					} else if(!Player.isWalking) {
+						setStatusAction("Press 'F' to Land.");
+						if( 70 in keysDown && keysDown[70] && gState == GAMESTATE.PLAYING && !this.dontAsk){ // F
+					    	Player.fly_pVec.x = this.pVec.x;
+					    	Player.fly_pVec.y = this.pVec.y + 5 + 3;
+					    	Player.fly_pVec.z = this.pVec.z;
+							Player.toggleFlyWalk();
+							this.hasShip = true;
+							this.dontAsk = true;	
+						} else {
+							this.dontAsk = false;
+						}
+					}
+					
+										   
 				}		
 			}catch (e){}
 		}

@@ -113,20 +113,25 @@ var Player = {
 		}
 		
 		if ( 70 in keysDown && keysDown[70] && gState == GAMESTATE.PLAYING) {	// F
-            this.isWalking = !this.isWalking;
-            this.pVecWalk.x = this.fly_pVec.x;
-            this.pVecWalk.z = this.fly_pVec.z;
-            this.pVecWalk.y = this.fly_pVec.y;//getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);
-            
-            this.radius = (this.isWalking)? 2:5 ; // flymode radius = 5, walk mode radius = 2
-			this.position = (this.isWalking)? this.pVecWalk : this.fly_pVec ;
-            
-            this.walkVY = 10;
+         	//this.toggleFlyWalk();  
         }
 		
 		
 		
 	    mainCamera.updateMatrix();	
+	},
+	
+	toggleFlyWalk: function(){
+		this.isWalking = !this.isWalking;
+        this.pVecWalk.x = this.fly_pVec.x;
+        this.pVecWalk.z = this.fly_pVec.z;
+        this.pVecWalk.y = this.fly_pVec.y;//getTerrainHeight(terrainMesh, this.pVecWalk.x, this.pVecWalk.z);
+        
+        this.radius = (this.isWalking)? 2:5 ; // flymode radius = 5, walk mode radius = 2
+		this.position = (this.isWalking)? this.pVecWalk : this.fly_pVec ;
+        
+        this.walkVY = 10;
+	
 	},
 	
 	// ================== F L Y I N G ==================

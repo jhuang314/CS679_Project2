@@ -102,7 +102,8 @@ function onLoad(){
 	spawnElement(new GreenShield (300, 0, -300, 100), ELEMENT.SCENERY);
 	spawnElement(new SlidingBox(100, 25 + 2.5, 100, 10,5,10, false), ELEMENT.SCENERY)	
 	
-	spawnElement(new LandingPad (0, 25, 300), ELEMENT.SCENERY);
+	spawnElement(new LandingPad (0, getTerrainHeight(terrainMesh, 0 ,300), 300), ELEMENT.SCENERY);
+	spawnElement(new LandingPad (100, getTerrainHeight(terrainMesh, 100 ,300), 300), ELEMENT.SCENERY);
 	spawnElement(new Balloon(-300,100,300, 20, 30,10,15, 50), ELEMENT.SCENERY)
 	
 	 
