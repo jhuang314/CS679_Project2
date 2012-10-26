@@ -130,7 +130,7 @@ GreenShield.prototype = {
 				if(objectType === 4 && ShowGreenTip){
 					
 					SetStatusTip("You can't fly through a Green Shield. Try walking!", 1500)
-					ShowRedTip = false;
+					ShowGreenTip = false;
 					
 					
 									

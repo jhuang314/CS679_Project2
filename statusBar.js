@@ -38,12 +38,14 @@ function drawStatusBar() {
 		
 		
 		if(ActionSet){
-			ctx.fillStyle = "dark-green";
+			ctx.fillStyle = "#00EE00";
+			ctx.strokeStyle = "black"                                                                          
 			tipTimeLeft = 0;
 			ActionSet = false;
 			ctx.textAlign = "middle";
 			ctx.font = "30px Verdana";
 			ctx.fillText(StatusAction, canvas.width/2 -(Math.round(ctx.measureText(StatusAction).width/2)), 100);
+			ctx.strokeText(StatusAction, canvas.width/2 -(Math.round(ctx.measureText(StatusAction).width/2)), 100)
 		} else if(tipTimeLeft > 0){
 			ctx.fillStyle = "black";
 			if(tipTimeLeft < 1000){
