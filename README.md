@@ -43,4 +43,14 @@ BG Music "Approaching The Sun"
 	
 	http://www.newgrounds.com/audio/listen/122295
 	
+  Bubble Menace 
+  Ben Reddersen, Dongyoung Cho, James Pulec 
+    
+	Instruction 
+	This is a Flight simulator game.
+	The goal is to pop all the bubbles.
+	You can walk when you reach the landing point.
+	The bonus points will be added to your score based on your finishing time.
+	To see the Control Instruction press p to pause.
+	Good Luck!
 	
