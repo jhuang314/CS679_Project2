@@ -28,7 +28,7 @@ function drawStatusBar() {
 		ctx.fillStyle = "#F9B7FF";
 		ctx.font = "20px Verdana";	
 		ctx.textBaseline = 'bottom';	
-		ctx.fillText("Bubble : " + popCount/2, 10, canvas.height-15);
+		ctx.fillText("Bubbles Left : " + totalBubbles, 10, canvas.height-15);
 		ctx.fillStyle = "#57E964";
 		//score = Math.round(popCount/2 * 300 * 10) / 10;
 		ctx.fillText("Score : " + score, canvas.width/2 - 80, canvas.height-15);
@@ -98,7 +98,7 @@ function drawEnding() {
 	
 	ctx.fillStyle = "#F9B7FF";
 	ctx.font = "20px Verdana";	
-	ctx.fillText("Bubble : " + popCount/2, 10, canvas.height-15);
+	ctx.fillText("Bubbles Left : " + totalBubbles, 10, canvas.height-15);
 	ctx.fillStyle = "#57E964";
 	t = "Score : " + score;
 	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height-15);

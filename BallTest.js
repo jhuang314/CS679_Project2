@@ -1,6 +1,8 @@
 //
 
 
+var totalBubbles = 0;
+
 var highResSphere = null;
 var bubbleURLS = [
 		'textures/cube/skybox/px.jpg','textures/cube/skybox/nx.jpg',
@@ -33,17 +35,9 @@ var BallTest = function(radius, x, y, z){
 	this.radius = radius;
 
 	var geometry = highResSphere;  
-/*		
-	var material = new THREE.ShaderMaterial({
-	  uniforms: THREEx.UniformsLib['ball'],
-	  attributes: THREEx.AttributesLib['ball'],
-	  vertexShader: THREEx.ShaderLib['ball'].vertexShader,
-	  fragmentShader: THREEx.ShaderLib['ball'].fragmentShader,
-	  transparent: true
-	});
-*/	
-	//var material = new THREE.MeshPhongMaterial({color: 0x000088, ambient: 0x000088, specular: 0x008888, emissive: 0x000044, shininess:3});
-	
+
+	totalBubbles++;
+
 	this.collisionMaterial =  new THREE.MeshPhongMaterial({color: 0x008800, ambient: 0x008800, specular: 0x008888, emissive: 0x004400, shininess:3});
 	
 	
@@ -178,6 +172,7 @@ BallTest.prototype = {
 		if(this.remove){
 			
 			scene.remove(this.mesh);
+			totalBubbles--;
 			return STATE.DEAD;
 				
 		}
