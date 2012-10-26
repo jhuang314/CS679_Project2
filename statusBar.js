@@ -3,6 +3,14 @@ var popCount = 0;
 var StatusBarTip = "Pop all the Bubbles!";
 var tipTimeLeft = 2000;
 
+var StatusAction = "";
+
+var ActionSet = false;
+
+var setStatusAction = function(action){
+	StatusAction = action;
+	ActionSet = true;
+}
 
 var SetStatusTip = function(tip, time){
 	 StatusBarTip = tip;
@@ -28,8 +36,16 @@ function drawStatusBar() {
 		ctx.fillText("Time : " + Math.round(clock.getElapsedTime()*10)/10, canvas.width - 140, canvas.height-15);
 		
 		
-		if(tipTimeLeft > 0){
-			
+		
+		if(ActionSet){
+			ctx.fillStyle = "dark-green";
+			tipTimeLeft = 0;
+			ActionSet = false;
+			ctx.textAlign = "middle";
+			ctx.font = "30px Verdana";
+			ctx.fillText(StatusAction, canvas.width/2 -(Math.round(ctx.measureText(StatusAction).width/2)), 100);
+		} else if(tipTimeLeft > 0){
+			ctx.fillStyle = "black";
 			if(tipTimeLeft < 1000){
 				ctx.globalAlpha = tipTimeLeft * 0.001	
 			}
@@ -41,7 +57,7 @@ function drawStatusBar() {
 		
 	}
 	
-	if	(Math.round(clock.getElapsedTime()*10)/10 > 30)
+	if	(Math.round(clock.getElapsedTime()*10)/10 > 3000)
 		gState = GAMESTATE.END;
 }
 
