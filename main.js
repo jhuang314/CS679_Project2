@@ -223,8 +223,11 @@ function run() {
 	if (gState == GAMESTATE.MENU){
 		drawMainMenu();
 	}
-	else {
+	else if(gState == GAMESTATE.PLAYING){
 		drawStatusBar();
+	}
+	else if(gState == GAMESTATE.END) {
+		drawEnding();
 	}
 
 	updateAllElements(elapsedT);
