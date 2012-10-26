@@ -109,7 +109,7 @@ function onLoad(){
 	
 	spawnElement(new  Coin (150, getTerrainHeight(terrainMesh, 150 ,-300) + 30, -300), ELEMENT.SCENERY);
 	
-	spawnElement(new Balloon(-300,100,300, 20, 30,10,15, 50), ELEMENT.SCENERY)
+	//spawnElement(new Balloon(-300,100,300, 20, 30,10,15, 50), ELEMENT.SCENERY)
 	
 	 
 	for( var i = 0; i < 100; i += 2){
