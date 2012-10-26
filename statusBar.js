@@ -28,7 +28,7 @@ function drawStatusBar() {
 		ctx.fillStyle = "#F9B7FF";
 		ctx.font = "20px Verdana";	
 		ctx.textBaseline = 'bottom';	
-		ctx.fillText("Bubble : " + popCount/2, 10, canvas.height-15);
+		ctx.fillText("Bubbles Left : " + totalBubbles, 10, canvas.height-15);
 		ctx.fillStyle = "#57E964";
 		//score = Math.round(popCount/2 * 300 * 10) / 10;
 		ctx.fillText("Score : " + score, canvas.width/2 - 80, canvas.height-15);
@@ -61,7 +61,7 @@ function drawStatusBar() {
 		
 	}
 	
-	if	(Math.round(clock.getElapsedTime()*10)/10 >= 3000)
+	if	(totalBubbles === 0)
 		gState = GAMESTATE.END;
 }
 
@@ -72,13 +72,13 @@ function drawMainMenu() {
 	ctx.globalAlpha = 0.8;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "red";
-	ctx.font = "bold 60px Verdana";	
-	t = "Bubble Menace";
+	ctx.font = "bold 50px Verdana";	
+	t = "Flight Simulator";
 	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2);
 	ctx.fillStyle = "blue";
 	ctx.font = "bold 30px Verdana";	
 	t = "Press Enter to Start";
-	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 + 70);
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 + 50);
 }
 
 function drawEnding() {
@@ -98,7 +98,7 @@ function drawEnding() {
 	
 	ctx.fillStyle = "#F9B7FF";
 	ctx.font = "20px Verdana";	
-	ctx.fillText("Bubble : " + popCount/2, 10, canvas.height-15);
+	ctx.fillText("Bubbles Left : " + totalBubbles, 10, canvas.height-15);
 	ctx.fillStyle = "#57E964";
 	t = "Score : " + score;
 	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height-15);

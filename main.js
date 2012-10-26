@@ -98,10 +98,12 @@ function onLoad(){
 //	scene.add (tempCube); 
 	
 	var RedShield1 = new RedShield (-300, 0, -300, 100);
-	
+	spawnElement(new BallTest(30, -300, 50 , -300), ELEMENT.SCENERY );
 	spawnElement(RedShield1, ELEMENT.SCENERY);
 	
 	spawnElement(new GreenShield (300, 0, -300, 100), ELEMENT.SCENERY);
+	spawnElement(new BallTest(30, 300, 50 , -300), ELEMENT.SCENERY );
+	
 	spawnElement(new SlidingBox(100, 25 + 5, 100, 15,10,15, false), ELEMENT.SCENERY)	
 	
 	spawnElement(new LandingPad (0, getTerrainHeight(terrainMesh, 0 ,300), 300), ELEMENT.SCENERY);
