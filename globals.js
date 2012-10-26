@@ -40,7 +40,8 @@ var updateInput = null;
 var GAMESTATE = {
 	MENU : 0,
 	PLAYING : 1,
-	END :2
+	PAUSED : 2,
+	END : 3
 };
 
 var gState = 0;

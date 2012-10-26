@@ -84,6 +84,8 @@ function onLoad(){
 	stats.setMode( 0 );	// 0: fps, 1: ms
 	document.body.appendChild( stats.domElement );
 	
+	bgElement = document.getElementById('bgSound');
+	
 	//sound1 = new Sound( ['sound/techno.ogg','sound/techno.mp3'], 50, 1 );
 	//sound1.position.copy( lightSphere.position );
 	//sound1.play();
@@ -219,6 +221,7 @@ function run() {
 	if(elapsedT > 50){
 		elapsedT == 50;
 	}
+	playControl();
 	if (gState == GAMESTATE.MENU){
 		drawMainMenu();
 	}
