@@ -112,7 +112,7 @@ var Player = {
 		    this.updateFlying(timeElapsed);
 		}
 		
-		if ( 70 in keysDown && keysDown[70]) {	// F
+		if ( 70 in keysDown && keysDown[70] && gState == GAMESTATE.PLAYING) {	// F
             this.isWalking = !this.isWalking;
             this.pVecWalk.x = this.fly_pVec.x;
             this.pVecWalk.z = this.fly_pVec.z;
@@ -143,10 +143,10 @@ var Player = {
 		//this.fly_pVec.z -= Math.cos(this.fly_dir.y) * this.flySpeed * timeElapsed * 0.001;
     	//this.fly_pVec.x -= Math.sin(this.fly_dir.y ) * this.flySpeed * timeElapsed * 0.001;
              
-		if ( 65 in keysDown) {	//A
+		if ( 65 in keysDown && gState == GAMESTATE.PLAYING) {	//A
 			this.fly_dir.y += timeElapsed * 0.001 * 1;
 			this.flyRoll -= timeElapsed * 0.001 * 1;
-        } else if ( 68 in keysDown) {	//D
+        } else if ( 68 in keysDown && gState == GAMESTATE.PLAYING) {	//D
             
 			this.fly_dir.y -= timeElapsed * 0.001 * 1;
 			this.flyRoll += timeElapsed * 0.001 * 1;
@@ -170,12 +170,12 @@ var Player = {
 		    this.flyRoll = -Math.PI/4;
 		}
 	
-		if ( 87 in keysDown) {	// S
+		if ( 87 in keysDown && gState == GAMESTATE.PLAYING) {	// S
             this.fly_dir.x += timeElapsed * 0.001 * 1;
             
 			//this.flySpeed = 20;
 			
-		} else 	if ( 83 in keysDown) {	// W
+		} else 	if ( 83 in keysDown && gState == GAMESTATE.PLAYING) {	// W
             this.fly_dir.x -= timeElapsed * 0.001 * 1;
             
 			//this.flySpeed = 60;
@@ -225,7 +225,7 @@ var Player = {
 		this.mesh.rotation.y -= 0.01;
 		//console.log(camXrot + ", "+ camYrot)
     	
-    	if(dragging){
+    	if(dragging && gState == GAMESTATE.PLAYING){
 			this.rotWalk.x += frameDragPixY * 0.005;
 			this.rotWalk.y += frameDragPixX * 0.005;
 		
@@ -246,32 +246,32 @@ var Player = {
     	//var speed = 0.5
     
 		
-		if ( 87 in keysDown) {	//Up
+		if ( 87 in keysDown && gState == GAMESTATE.PLAYING) {	//Up
              this.pVecWalk.z -= Math.cos(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
              this.pVecWalk.x -= Math.sin(this.rotWalk.y ) * this.walkSpeed * timeElapsed * 0.001;
         } else 
-        if ( 83 in keysDown) {	//Down
+        if ( 83 in keysDown && gState == GAMESTATE.PLAYING) {	//Down
              this.pVecWalk.z += Math.cos(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
              this.pVecWalk.x += Math.sin(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
         }
-        if ( 65 in keysDown) {	//Left
+        if ( 65 in keysDown && gState == GAMESTATE.PLAYING) {	//Left
             this.pVecWalk.z += Math.sin(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
             this.pVecWalk.x -= Math.cos(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
         }
-        if ( 68 in keysDown) {	//Right
+        if ( 68 in keysDown && gState == GAMESTATE.PLAYING) {	//Right
             this.pVecWalk.z -= Math.sin(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
             this.pVecWalk.x += Math.cos(this.rotWalk.y) * this.walkSpeed * timeElapsed * 0.001;
         }
         
         // these shortcut physics
-        if ( 81 in keysDown) {	//Q
+        if ( 81 in keysDown && gState == GAMESTATE.PLAYING) {	//Q
             this.pVecWalk.y += this.walkSpeed * timeElapsed * 0.001;
         }
-        if ( 69 in keysDown) {	//E
+        if ( 69 in keysDown && gState == GAMESTATE.PLAYING) {	//E
             this.pVecWalk.y -= this.walkSpeed * timeElapsed * 0.001;
         }
         
-        if(32 in keysDown && keysDown[32] && this.groundContact){
+        if(32 in keysDown && keysDown[32] && this.groundContact && gState == GAMESTATE.PLAYING){
 			this.walkVY = 10;				
 		}
         

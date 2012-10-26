@@ -35,7 +35,7 @@ function playControl() {
 		}
 	}
 	
-	if ( 67 in keysDown && keysDown[67]){
+	if ( 67 in keysDown && keysDown[67] && gState == GAMESTATE.PLAYING){
 		if (!Player.isWalking){
 			if ( cMode == 1) 
 				cMode = 0;
