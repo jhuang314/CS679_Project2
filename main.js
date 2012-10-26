@@ -218,11 +218,12 @@ function run() {
 	
 	/* We have to slow down the Physics or we get results that are
 	too far outside acceptable bounds. Admitedly we could be doing 
-	physics better, but we are where we are. */
+	physics better, but we are where we are. 
 	
 	if(elapsedT > 50){
-		elapsedT == 50;
-	}
+		elapsedT == 50; // well, I see why that was not working *facepalm*
+		
+	}// Seems to run OK without this, so removing it for now*/
 	playControl();
 	if (gState == GAMESTATE.MENU){
 		drawMainMenu();
