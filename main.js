@@ -106,14 +106,14 @@ function onLoad(){
 	spawnElement(RedShield1, ELEMENT.SCENERY);
 	
 	spawnElement(new GreenShield (300, 0, -300, 100), ELEMENT.SCENERY);
-	spawnElement(new SlidingBox(100, 25 + 2.5, 100, 10,5,10, false), ELEMENT.SCENERY)	
+	spawnElement(new SlidingBox(100, 25 + 5, 100, 15,10,15, false), ELEMENT.SCENERY)	
 	
 	spawnElement(new LandingPad (0, getTerrainHeight(terrainMesh, 0 ,300), 300), ELEMENT.SCENERY);
 	spawnElement(new LandingPad (150, getTerrainHeight(terrainMesh, 150 ,-300), -300), ELEMENT.SCENERY);
 	
 	spawnElement(new  Coin (150, getTerrainHeight(terrainMesh, 150 ,-300) + 30, -300), ELEMENT.SCENERY);
 	
-	spawnElement(new Balloon(-300,100,300, 20, 30,10,15, 50), ELEMENT.SCENERY)
+	//spawnElement(new Balloon(-300,100,300, 20, 30,10,15, 50), ELEMENT.SCENERY)
 	
 	 
 	for( var i = 0; i < 100; i += 2){
@@ -126,6 +126,18 @@ function onLoad(){
 		var randY = tH + randR + Math.random() * 10 + Math.random() * 10 + 1;
 		
 		spawnElement(new BallTest(randR, randX, randY , randZ), ELEMENT.SCENERY );
+	}
+	
+	for( var i = 0; i < 50; i += 1){
+		var randX = Math.random() * 1000 - 500;
+		var randZ = Math.random() * 1000 - 500;
+		
+		
+		var tH = getTerrainHeight(terrainMesh, randX ,randZ);
+		
+		var randY = tH + randR + Math.random() * 10 + Math.random() * 10 + 1;
+		
+		spawnElement(new Coin (randX, getTerrainHeight(terrainMesh, randX ,randZ) + 7, randZ), ELEMENT.SCENERY );
 	}
 	
 	spawnElement(new BoxTest(100, 0, 100, 100,50,70), ELEMENT.SCENERY);
