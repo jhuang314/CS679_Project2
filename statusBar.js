@@ -46,35 +46,42 @@ function drawStatusBar() {
 }
 
 function drawMainMenu() {
+	var t = null;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "white";
 	ctx.globalAlpha = 0.8;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "red";
 	ctx.font = "bold 50px Verdana";	
-	ctx.fillText("Flight Simulator", (canvas.width/2) - 230, canvas.height/2);
+	t = "Flight Simulator";
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2);
 	ctx.fillStyle = "blue";
 	ctx.font = "bold 30px Verdana";	
-	ctx.fillText("Press Enter to Start", (canvas.width/2) - 180, canvas.height/2 + 50);
+	t = "Press Enter to Start";
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 + 50);
 }
 
 function drawEnding() {
+	var t = null;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "black";
 	ctx.globalAlpha = 1;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "red";
 	ctx.font = "bold 80px Verdana";	
-	ctx.fillText("Game Over", (canvas.width/2) - 250, canvas.height/2 - 50);
+	t = "Game Over";
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 - 50);
 	ctx.fillStyle = "yellow";
 	ctx.font = "bold 30px Verdana";	
-	ctx.fillText("Press F5 to Restart", (canvas.width/2) - 170, canvas.height/2 + 50);
+	t = "Press F5 to Restart";
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height/2 + 50);
 	
 	ctx.fillStyle = "#F9B7FF";
 	ctx.font = "20px Verdana";	
 	ctx.fillText("Bubble : " + popCount/2, 10, canvas.height-15);
 	ctx.fillStyle = "#57E964";
-	ctx.fillText("Score : " + score, canvas.width/2 - 80, canvas.height-15);
+	t = "Score : " + score;
+	ctx.fillText(t, canvas.width/2 -(Math.round(ctx.measureText(t).width/2)), canvas.height-15);
 	
 	Player.flySpeed = 0;
 	clock.stop(); 
