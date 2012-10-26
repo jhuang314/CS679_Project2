@@ -84,6 +84,9 @@ function onLoad(){
 	document.body.appendChild( stats.domElement );
 	
 	bgElement = document.getElementById('bgSound');
+	imageObj = new Image();
+	imageObj.onload = function() {};
+	imageObj.src = 'textures/control.png';
 	
 	var map2 = THREE.ImageUtils.loadTexture('textures/04muroch256.png', new THREE.UVMapping(), function() {renderer.render(scene);})
 	cubeMaterial = new THREE.MeshPhongMaterial({map:map2, emissive: 0x333333, shininess:0});

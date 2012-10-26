@@ -2,7 +2,7 @@ var popCount = 0;
 
 function drawStatusBar() {
 	if (gState == GAMESTATE.PLAYING){
-		ctx.clearRect(0, canvas.height-50, canvas.width, canvas.height);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = "white";
 		ctx.globalAlpha = 0.1;
 		ctx.fillRect(0, canvas.height-50, canvas.width, canvas.height);
