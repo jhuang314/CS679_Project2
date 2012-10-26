@@ -10,7 +10,7 @@ var Player = {
 		this.pVecWalk = new THREE.Vector3(0, getTerrainHeight(terrainMesh, 0, 0) + 2, 0);
 		this.rotWalk = new THREE.Vector3(0,0,0);
 	
-		this.walkSpeed = 5; // 5 m/s, a brisk jogging speed. 
+		this.walkSpeed = 10; // 5 m/s, a brisk jogging speed. 
 	
 		this.walkVY = 0; // velocity in the y direction
 	

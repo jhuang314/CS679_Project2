@@ -90,26 +90,24 @@ BallTest.prototype = {
 	collideSphere: function(pos,radius, objectType){
 	
 		if(objectType === 4){ // player type constant is 4
-			if (!Player.isWalking){
-				try{ // try block because Player doesn't get loaded until later. 
-					if(distanceSqrd(Player.fly_pVec, this.pVec) < Math.pow(this.radius + 5, 2)){
-						//this.mesh.material = this.collisionMaterial;
-						
-						if(bubbleSound === null){
-							bubbleSound = new Sound( ['sound/cork.ogg'], 50, 1 );
-						}
-						popCount++;
-						bubbleSound.play();
-						this.remove = true;
-					}
-				}catch(e){
-					console.log(e.message)
-				}
-				
-			}			
 		
+			try{ // try block because Player doesn't get loaded until later. 
+				if(distanceSqrd(pos, this.pVec) < Math.pow(this.radius + radius, 2)){
+					//this.mesh.material = this.collisionMaterial;
+					
+					if(bubbleSound === null){
+						bubbleSound = new Sound( ['sound/cork.ogg'], 50, 1 );
+					}
+					popCount++;
+					bubbleSound.play();
+					this.remove = true;
+				}
+			}catch(e){
+				console.log(e.message)
+			}
 		}
 		return null; // the prototype returns null
+		
 	},
 
 	collisionResponse: function(responseVector, insideObject){
