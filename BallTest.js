@@ -93,7 +93,7 @@ BallTest.prototype = {
 			if (!Player.isWalking){
 				try{ // try block because Player doesn't get loaded until later. 
 					if(distanceSqrd(Player.fly_pVec, this.pVec) < Math.pow(this.radius + 5, 2)){
-						this.mesh.material = this.collisionMaterial;
+						//this.mesh.material = this.collisionMaterial;
 						
 						if(bubbleSound === null){
 							bubbleSound = new Sound( ['sound/qubodup-crash.ogg'], 50, 1 );

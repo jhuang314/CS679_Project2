@@ -1,6 +1,7 @@
 // JavaScript Document
 // MAIN
-
+var canvas = null;
+var ctx = null;
 function onLoad(){
 
 	// get the animation frame
@@ -15,7 +16,7 @@ function onLoad(){
 	
 	// container is in globals.js
 	container = document.getElementById("container");
-
+		
 	var jsonLoader = new THREE.JSONLoader();
     initGameElementManager();     
 
@@ -208,9 +209,7 @@ function run() {
 	stats.begin();
 	elapsedT = Date.now() - startT;
 	startT = Date.now();
-	cycle_s = cycle_s + 0.003;
-	if (cycle_s > 1)
-		cycle_s -= 1;
+
 	
 	/* We have to slow down the Physics or we get results that are
 	too far outside acceptable bounds. Admitedly we could be doing 
@@ -219,6 +218,21 @@ function run() {
 	if(elapsedT > 50){
 		elapsedT == 50;
 	}
+	
+	if(canvas === null){
+		canvas = document.getElementById("myCanvas");
+		ctx = canvas.getContext('2d');
+	}
+	
+	ctx.clearRect(0, canvas.height-20, canvas.width, canvas.height);
+	ctx.fillStyle = "white";
+	ctx.globalAlpha = 0.1;
+	ctx.fillRect(0, canvas.height-20, canvas.width, canvas.height);
+	ctx.globalAlpha = 1;
+	ctx.strokeStyle = "#000000";
+	ctx.font = "6px Verdana";	
+	ctx.textBaseline = 'bottom';	
+	ctx.strokeText("Test: " + startT, 5, canvas.height-6);
 	
 	sound1.update(mainCamera);
 	
