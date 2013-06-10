@@ -188,7 +188,7 @@ var Player = {
 			this.flySpeed -= 1;
 		}
 		
-		if(this.flySpeed > 90 && gState == GAMESTATE.PLAYING){
+		if(this.flySpeed > 9000 && gState == GAMESTATE.PLAYING){
 			this.flySpeed = 90;		                    
 		} else if (this.flySpeed < 10 && gState == GAMESTATE.PLAYING){
 			this.flySpeed = 10;
